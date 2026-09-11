@@ -21,6 +21,8 @@ results/
   reference/idm_hist.json   26M-rollout IDM reference histogram (Exp4)
   exp1/ ... exp4/           config.json, meta.json, raw/, summary.json, metrics.json, diagnostics/
 envs/idm/                   Exp4 Julia environment
+manuscript/                 snapshot of the canonical Overleaf manuscript source; build with
+                            pdflatex main && bibtex main && pdflatex main && pdflatex main
 ```
 
 Problem definitions are in [`../examples/problems`](../examples/problems): `toy.jl` (Exp1),

@@ -1,1 +1,9 @@
 .DS_Store
+
+# LaTeX build outputs for the manuscript
+paper/manuscript/*.aux
+paper/manuscript/*.log
+paper/manuscript/*.bbl
+paper/manuscript/*.blg
+paper/manuscript/*.out
+paper/manuscript/*.synctex.gz

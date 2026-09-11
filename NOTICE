@@ -84,3 +84,14 @@ The package `Project.toml` at this commit retains the upstream version string
 Earlier revisions of this repository vendored the same source under
 `third_party/StructuredGaussianMixtures/`. That copy was used to produce the
 Exp4 results; its code files are identical to the pinned commit.
+
+
+4. paper/manuscript
+-------------------
+
+`paper/manuscript/` contains a snapshot of the source of the accompanying
+manuscript, taken from its canonical Overleaf project. Unlike the material
+listed in section 2, it is not covered by the repository's MIT software license.
+The third-party style files `jmlr2e.sty` (from
+https://github.com/JmlrOrg/jmlr-style-file) and `vector.sty` retain their
+upstream terms.

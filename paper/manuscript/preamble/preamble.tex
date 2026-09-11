@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Other packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\usepackage[detect-mode=true]{siunitx}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\graphicspath{{./figures/}}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{cleveref}
+\usepackage{vector} % local
+\usepackage[font=small]{caption}
+\usepackage{natbib}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage{dsfont} % \mathds{1}
+\usepackage{colortbl}
+\usepackage[mode=buildnew]{standalone}
+% \usepackage[natbib=true]{biblatex}
+\usepackage{tabularx}
+
+
+\newcommand{\algname}{\text{ARIS}}
+\newcommand{\algfullname}{\text{Amortized Rare-Event Importance Sampling}}
+
+\sisetup{separate-uncertainty=true,multi-part-units=single,table-align-uncertainty=true, table-format = -3.2(3), detect-weight=true, detect-family=true, detect-all, input-digits = 0123456789\pi}
+
+
+\definecolor{juliafunccolor}{HTML}{2e51a2}
+\definecolor{juliaparenscolor}{HTML}{f2d71c}
+\definecolor{pastelRed}{RGB}{245, 97, 92}
+\definecolor{pastelBlue}{RGB}{0, 114, 178}
+\definecolor{pastelGreen}{RGB}{0, 158, 115}
+\definecolor{pastelPurple}{RGB}{135, 112, 254}
+\definecolor{pastelYellow}{RGB}{255, 205, 117}
+
+
+\definecolor{newcolor}{HTML}{000000}
+\newcommand{\new}[1]{{\color{newcolor}#1}}
+
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Algorithms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TiKZ and PGF plots
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{external}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes,arrows,fit}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta, calc, shapes}
+\usetikzlibrary{graphs}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{shadows}
+\usepgfplotslibrary{fillbetween}
+
+\definecolor{blues1}{RGB}{198, 219, 239}
+\definecolor{blues2}{RGB}{158, 202, 225}
+\definecolor{blues3}{RGB}{107, 174, 214}
+\definecolor{blues4}{RGB}{49, 130, 189}
+\definecolor{blues5}{RGB}{8, 81, 156}
+
+\definecolor{grays1}{RGB}{219, 219, 219}
+\definecolor{grays2}{RGB}{202, 202, 202}
+\definecolor{grays3}{RGB}{174, 174, 174}
+\definecolor{grays4}{RGB}{130, 130, 130}
+\definecolor{grays5}{RGB}{81, 81, 81}
+
+%% For Pendulum
+\usetikzlibrary{calc,tikzmark,positioning,shadows,arrows}
+
+\definecolor{pastelred}{RGB}{245,97,92}
+\definecolor{steelblue}{rgb}{0.27,0.51,0.71}
+
+% Format Helpers
+\newcommand{\ph}[1]{{\textbf{#1}:}} %
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+%% Math Helpers
+\newcommand{\ones}{\mathbf 1}
+\newcommand{\reals}{{\mbox{\bf R}}}
+\newcommand{\integers}{{\mbox{\bf Z}}}
+\newcommand{\symm}{{\mbox{\bf S}}}  % symmetric matrices
+
+\newcommand{\nullspace}{{\mathcal N}}
+\newcommand{\range}{{\mathcal R}}
+\newcommand{\Rank}{\mathop{\bf Rank}}
+\newcommand{\Tr}{\mathop{\bf Tr}}
+\newcommand{\diag}{\mathop{\bf diag}}
+\newcommand{\card}{\mathop{\bf card}}
+\newcommand{\rank}{\mathop{\bf rank}}
+\newcommand{\conv}{\mathop{\bf conv}}
+\newcommand{\prox}{\mathbf{prox}}
+
+\newcommand{\Expect}{\mathop{\mathbb{E}}}
+\newcommand{\Reals}{\mathop{\mathbb{R}}}
+\newcommand{\Prob}{\mathop{\bf Prob}}
+\newcommand{\Co}{{\mathop {\bf Co}}} % convex hull
+\newcommand{\dist}{\mathop{\bf dist{}}}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\newcommand{\epi}{\mathop{\bf epi}} % epigraph
+\newcommand{\Vol}{\mathop{\bf vol}}
+\newcommand{\dom}{\mathop{\bf dom}} % domain
+\newcommand{\intr}{\mathop{\bf int}}
+\newcommand{\sign}{\mathop{\bf sign}}
+
+\newcommand{\cf}{{\it cf.}}
+\newcommand{\eg}{{\it e.g.}}
+\newcommand{\ie}{{\it i.e.}}
+\newcommand{\etc}{{\it etc.}}
+
+\newcommand{\mbf}[1]{\boldsymbol{#1}}
+
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+
+\usetikzlibrary{pgfplots.colorbrewer}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{polar}
+\usepgfplotslibrary{smithchart}
+\usepgfplotslibrary{statistics}
+\usepgfplotslibrary{dateplot}
+\usepgfplotslibrary{ternary}
+
+\pgfplotsset{
+    colormap={pastelPG}{
+        color(0cm)=(pastelPurple)   % Start color: blue
+        color(0.5cm)=(white) % Neutral color: white
+        color(1cm)=(pastelGreen)    % End color: red
+    }
+}
