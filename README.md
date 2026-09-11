@@ -53,16 +53,60 @@ train!(cv, sys)
 is_estimate(cv.buffer; threshold = 0.0)
 ```
 
-The main package components are:
+## API Overview
 
-- `System` — interface for defining a validation problem;
-- `JointModel`, `ConditionalEMGMM`, and `ConditionalGaussian` — proposal models;
-- `ConditionalValidation` and `train!` — adaptive proposal training;
-- `is_estimate` — single-threshold importance-sampling estimation;
-- `ams`, `pmc`, and `CrossEntropyMethod` — baseline methods.
+A validation problem is a `System`; `ConditionalValidation` and `train!` adapt a
+proposal to it, and `is_estimate` turns the samples into a failure-probability
+estimate. Failure means robustness ρ ≤ 0 unless another threshold is given.
+
+- `System` — problem interface: subtype `System.SystemParameters` and extend
+  `prior`, `simulate`, `evaluate`, and `get_xdim` / `get_sdim` / `get_depth`.
+- `ConditionalValidation(; model, xdim, depth, sdim, n_samples, n_iter, sampling_strategy)`
+  — an adaptive run; evaluated samples and weights are stored in `cv.buffer`.
+- `train!(cv, sys)` — runs the adaptive sampling loop.
+- `QuantileSampling(q; target = 0.0)` — moves the training threshold toward
+  `target` using the `q`-quantile of each batch's robustness values.
+- `JointModel(robustness_model, conditional_model)` — the ARIS proposal: a
+  distribution over robustness (e.g. `Normal()`) and a model of inputs given it.
+- `ConditionalEMGMM(k, xdim + 1, xdim + 1)` — `k`-component Gaussian-mixture
+  conditional model over inputs and robustness.
+- `ConditionalGaussian(xdim)` — single-Gaussian conditional model for `JointModel`.
+- `is_estimate(buffer; threshold = 0.0)` — importance-sampling estimate of
+  P(ρ ≤ `threshold`) from a training buffer.
+
+Baselines, each targeting ρ ≤ 0:
+
+- `CrossEntropyMethod(; model, xdim, depth, sdim, n_samples, n_iter)` — unconditional
+  cross-entropy method; train with `train!` and estimate with `is_estimate`.
+- `ams(sys)` — adaptive multilevel splitting; returns the estimate and per-level samples.
+- `pmc(sys; dₓ)` — population Monte Carlo with Gaussian kernels in `dₓ` dimensions.
 
 The multi-threshold estimator used for the paper experiments is implemented
 under [`paper/`](paper/) rather than exposed as part of the package API.
+
+### Defining a custom system
+
+```julia
+using LinearAlgebra
+
+# ρ(x) = β − (x₁ + x₂)/√2 with x ~ N(0, I₂)
+struct Linear2D <: System.SystemParameters
+    β::Float64
+end
+System.prior(::Linear2D) = MvNormal(zeros(2), I)
+System.get_xdim(::Linear2D) = 2
+System.get_sdim(::Linear2D) = 2
+System.get_depth(::Linear2D) = 1
+# batched form used by `train!`: inputs are columns, states are sdim × depth × N
+System.simulate(::Linear2D, X::AbstractMatrix) = reshape(X, 2, 1, size(X, 2))
+System.evaluate(s::Linear2D, S::AbstractArray{<:Real,3}) = s.β .- (S[1, 1, :] .+ S[2, 1, :]) ./ √2
+# per-sample form used by `ams` and `pmc`
+System.simulate(::Linear2D, x::AbstractVector) = x
+System.evaluate(s::Linear2D, x::AbstractVector) = s.β - (x[1] + x[2]) / √2
+```
+
+Use it in place of the toy system in Basic Usage, e.g. `train!(cv, Linear2D(3.5))`;
+the exact answer is Φ(−3.5) ≈ 2.3 × 10⁻⁴.
 
 ## Examples
 
