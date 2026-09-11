@@ -1,6 +1,7 @@
 # ARIS.jl
 
-[![CI](https://github.com/lea-m-hadzic/ARIS.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/lea-m-hadzic/ARIS.jl/actions/workflows/CI.yml)
+[![CI](https://github.com/sisl/ARIS.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/sisl/ARIS.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/sisl/ARIS.jl/graph/badge.svg)](https://codecov.io/gh/sisl/ARIS.jl)
 [![Julia](https://img.shields.io/badge/Julia-1.12-9558B2?logo=julia&logoColor=white)](https://julialang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
