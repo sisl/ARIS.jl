@@ -1,0 +1,13 @@
+[deps]
+AdversarialDriving = "0f7eb3e9-d51f-47f4-b915-6157e1c8ce29"
+ARIS = "0b8de057-cb0d-4b1a-91d7-07cc9cdc0c12"
+AutomotiveSimulator = "6aa42d20-6c96-11ea-1103-339224409280"
+AutomotiveVisualization = "0faf7fd0-6c98-11ea-1740-03605baa3b07"
+Crux = "e51cc422-768a-4345-bb8e-2246287ae729"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+POMDPTools = "7588e00f-9cae-40de-98dc-e0c70c48cdd7"
+POMDPs = "a93abf59-7444-517b-a68a-c42f96afdd7d"
+StructuredGaussianMixtures = "4b627f85-a485-4383-967f-8f50175dea55"
+Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"

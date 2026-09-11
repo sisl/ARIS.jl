@@ -1,0 +1,510 @@
+{
+  "ile_formula": "ILE = mean_{γ ∈ used} |log est(γ) − log truth(γ)|; used = {γ : est(γ) !== nothing && est(γ) > 0 && truth(γ) > 0}",
+  "gpd_tail": {
+    "unconstrained_anchor_spread_per_seed": [
+      10.561912326220178,
+      22.999273232706667,
+      74.8564857962166,
+      8.427726183361907,
+      11.864084168099318,
+      1.9844461442545456,
+      10.1816741869887,
+      7.634988153104936,
+      2.6966491352893853,
+      2.9974732651377756
+    ],
+    "xi_nonneg_anchor_spread_per_seed": [
+      2.5148186521846734,
+      6.5366366748392295,
+      13.448713546566433,
+      5.114261504265284,
+      5.8421085728100834,
+      1.2148819101816475,
+      1.4863002621348533,
+      1.7930990413528418,
+      93.53996452987003,
+      4.040637768863154
+    ],
+    "n_seeds": 10,
+    "anchor_quantiles": [
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "per_anchor": [
+      {
+        "n_eff_median": 9.788276383284508,
+        "unconstrained_xi_median": -0.026641886992700096,
+        "quantile": 0.02,
+        "xi_nonneg_estimate_median": 1.7019557660573448e-05,
+        "unconstrained_estimate_median": 4.74709453967656e-06
+      },
+      {
+        "n_eff_median": 8.209931199354422,
+        "unconstrained_xi_median": -0.05544898118159667,
+        "quantile": 0.05,
+        "xi_nonneg_estimate_median": 1.4218080921572415e-05,
+        "unconstrained_estimate_median": 3.074410933762036e-06
+      },
+      {
+        "n_eff_median": 23.689792750205765,
+        "unconstrained_xi_median": 0.016441346315184523,
+        "quantile": 0.1,
+        "xi_nonneg_estimate_median": 9.688910771197293e-06,
+        "unconstrained_estimate_median": 5.41988531070854e-06
+      },
+      {
+        "n_eff_median": 48.91804741462833,
+        "unconstrained_xi_median": -0.008871421688093092,
+        "quantile": 0.2,
+        "xi_nonneg_estimate_median": 9.803749406299023e-06,
+        "unconstrained_estimate_median": 3.635448995518513e-06
+      },
+      {
+        "n_eff_median": 84.11439533068778,
+        "unconstrained_xi_median": -0.036374933982958185,
+        "quantile": 0.3,
+        "xi_nonneg_estimate_median": 8.552704607978135e-06,
+        "unconstrained_estimate_median": 3.847812951341611e-06
+      }
+    ],
+    "reference_at_target": 3.107692307692308e-05
+  },
+  "config": {
+    "ile_formula": "ILE = mean_{γ ∈ used} |log est(γ) − log truth(γ)|; used = {γ : est(γ) !== nothing && est(γ) > 0 && truth(γ) > 0}",
+    "fit_ess_guard": "EtaMixture floors fit-ESS at eta*N",
+    "n_seeds": 10,
+    "sigma_smoothing": 0.0,
+    "batch_size": 1000,
+    "defensive_eta": 0.1,
+    "arms_requested": "abc",
+    "defensive_stratified": true,
+    "n_iter": 25,
+    "max_weight_fit": "Inf (eta-mixture bounds weights at 1/eta)",
+    "reference_check": {
+      "reference_ascale": 0.6,
+      "reference_d": 150,
+      "hist_json_fields": {
+        "blo": -0.02,
+        "d": 150,
+        "nsub": 4,
+        "bw": 0.0005,
+        "ndone": 26000000,
+        "ascale": 0.6,
+        "nb": 2040
+      },
+      "run_dt_phys": 0.05,
+      "d_match": true,
+      "run_ascale": 0.6,
+      "reference_n": 26000000,
+      "run_d": 150,
+      "robustness_definition": "rho = 0.99 - running-max PoCA reward; shared crosswalk_rollout used by both the reference generator and this run",
+      "nsub_match": true,
+      "reference_nsub": 4,
+      "reference_dt_phys": 0.05,
+      "reference_dt_phys_source": "NOT stored in hist.json; recovered from paper/experiments/idm_reference.jl AdversarialCrosswalk(; dt=DT_DIST/NSUB) with DT_DIST=0.2, NSUB=4 => 0.05",
+      "all_match": true,
+      "dt_phys_match": true,
+      "run_nsub": 4,
+      "ascale_match": true
+    },
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "quadrature_nodes": 1000,
+    "n_mixture_components": 2,
+    "adaptive_quantile": 0.2,
+    "rank": 10,
+    "budget_accounting": "nominal budget B=25000 per arm; the charged evaluations of each arm are in metrics.json",
+    "conditional": "low-rank-plus-diagonal (FactorEM)",
+    "budget_total": 25000,
+    "experiment": "exp4_idm",
+    "dimension": 150,
+    "separation_mapping": "sep(gamma) = sqrt(20/(0.99-gamma) - 20)",
+    "gpd_policy": "unconstrained and xi>=0 on the SAME buffer at predefined anchors; anchor sensitivity reported; no ground-truth anchor selection",
+    "proposal_family": "EtaMixture(JointModel(Normal(), ConditionalSGM(k=2, rank=10)), prior, eta)",
+    "measured_quantity": "failure-probability curve at real trajectory dimension against a 26M-rollout reference",
+    "regularization": "MAP D-prior covariance floor (D .= max.(D, 1e-4)) in the FactorEM inner M-step, vendored SGM",
+    "target_threshold": 0.0,
+    "gpd_anchor_quantiles": [
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "problem": "idm_crosswalk",
+    "problem_def": "AV crosswalk, 30 disturbance steps x 5 channels, dt_phys=0.05, ascale=0.60; rho = 0.99 - PoCA",
+    "threshold_grid": [
+      0.434,
+      0.38,
+      0.32,
+      0.26,
+      0.2,
+      0.14,
+      0.08,
+      0.0
+    ]
+  },
+  "experiment": "exp4_idm",
+  "seed_accounting": {
+    "seeds_requested": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "n_requested": 10,
+    "failure_records": [],
+    "n_completed": 10,
+    "n_failed": 0
+  },
+  "arms": {
+    "a_primary_sgm": {
+      "sep_at_gamma_min_median": 3.442343856243489,
+      "fit_ess_reindex_median": 0.02558948834250653,
+      "n_seeds": 10,
+      "fit_ess_raw_median": 0.11679676898002059,
+      "gamma_min_per_seed": [
+        0.3645557761192322,
+        0.3686103343963623,
+        0.3650575995445252,
+        0.3631784677505493,
+        0.360922634601593,
+        0.3570822477340698,
+        0.31060702800750734,
+        0.31865679025650023,
+        0.3686555027961731,
+        0.3049570083618164
+      ],
+      "secs_sim_and_fit_median": 444.7727930545807,
+      "secs_reindex_median": 1722.0417308807373,
+      "discovery_count": 10,
+      "ile_median": 0.4837577190023191,
+      "n_cells_nonnull_per_seed": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "n_grid_used_per_seed": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "gamma_min_median": 0.36205055117607116,
+      "reached_target_count": 0,
+      "n_evals_actual_median": 25000.0,
+      "n_contributing_ile": 10,
+      "ile_per_seed": [
+        0.45459117397714843,
+        0.8862211604519926,
+        0.6618774761643809,
+        0.5129242640274898,
+        0.39097927289605006,
+        0.3199191996246813,
+        0.5193672997322233,
+        0.5937214500688486,
+        0.3939920837895572,
+        0.3060302443492642
+      ],
+      "numerical_any_fallback_assisted": 0,
+      "tail_ess_gmax_median": 200.9873291975439,
+      "secs_total_median": 2164.475469350815,
+      "per_threshold": [
+        {
+          "sep_m": 3.996401258830591,
+          "abs_relerr_median": 0.19986618820321245,
+          "estimate_median": 0.0069322054735204836,
+          "gamma": 0.434,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 3.5758754516763633,
+          "abs_relerr_median": 0.19475535260443855,
+          "estimate_median": 0.0030409444689933843,
+          "gamma": 0.38,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 3.138589853526058,
+          "abs_relerr_median": 0.23694579351820338,
+          "estimate_median": 0.001093016454307752,
+          "gamma": 0.32,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 2.7197904834697475,
+          "abs_relerr_median": 0.41037509705566744,
+          "estimate_median": 0.000348747723396281,
+          "gamma": 0.26,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 2.3057440656331596,
+          "abs_relerr_median": 0.4264990958990963,
+          "estimate_median": 0.0001531344722059515,
+          "gamma": 0.2,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 1.878672873255449,
+          "abs_relerr_median": 0.7431295926841646,
+          "estimate_median": 8.44088000416303e-05,
+          "gamma": 0.14,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 1.4064216928154862,
+          "abs_relerr_median": 0.4250227069689293,
+          "estimate_median": 1.786852510650404e-05,
+          "gamma": 0.08,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 0.4494665749754932,
+          "abs_relerr_median": 0.4250227069689293,
+          "estimate_median": 1.786852510650404e-05,
+          "gamma": 0.0,
+          "n_nonnull": 10
+        }
+      ],
+      "n_grid_total": 8,
+      "cov_cond_med_median": null
+    },
+    "b_perthreshold": {
+      "n_seeds": 10,
+      "ile_median": 4.600429292982453,
+      "ile_per_seed": [
+        5.2790017044168795,
+        6.421884561396073,
+        7.454585010674497,
+        2.8827759505316717,
+        7.5259096931379945,
+        12.851834736834258,
+        0.9998216846164466,
+        3.9218568815480266,
+        3.362701169828402,
+        3.7072645006436495
+      ],
+      "n_cells_nonnull_per_seed": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "n_grid_used_per_seed": [
+        6,
+        6,
+        6,
+        5,
+        6,
+        7,
+        5,
+        5,
+        5,
+        5
+      ],
+      "secs_total_median": 445.0513925552368,
+      "per_threshold": [
+        {
+          "sep_m": 3.996401258830591,
+          "abs_relerr_median": 0.6917495148726641,
+          "estimate_median": 0.0026706229242037913,
+          "gamma": 0.434,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 3.5758754516763633,
+          "abs_relerr_median": 0.6024953974920905,
+          "estimate_median": 0.0015011455540940044,
+          "gamma": 0.38,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 3.138589853526058,
+          "abs_relerr_median": 0.7573369660709247,
+          "estimate_median": 0.0003475961297161751,
+          "gamma": 0.32,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 2.7197904834697475,
+          "abs_relerr_median": 0.6667140470965363,
+          "estimate_median": 0.00016687376209425006,
+          "gamma": 0.26,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 2.3057440656331596,
+          "abs_relerr_median": 0.9999969435328417,
+          "estimate_median": 6.46325247544155e-10,
+          "gamma": 0.2,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 1.878672873255449,
+          "abs_relerr_median": 1.0,
+          "estimate_median": 1.1902989219002486e-17,
+          "gamma": 0.14,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 1.4064216928154862,
+          "abs_relerr_median": 1.0,
+          "estimate_median": 0.0,
+          "gamma": 0.08,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 0.4494665749754932,
+          "abs_relerr_median": 1.0,
+          "estimate_median": 0.0,
+          "gamma": 0.0,
+          "n_nonnull": 10
+        }
+      ],
+      "n_grid_total": 8,
+      "n_evals_actual_median": 48000.0,
+      "n_contributing_ile": 10
+    },
+    "c_ams": {
+      "n_seeds": 10,
+      "ile_median": 0.2157694465129832,
+      "ile_per_seed": [
+        0.4668158409640485,
+        0.1319412840040437,
+        0.07316023005571881,
+        0.6379388993705282,
+        0.13542733084587852,
+        0.4466719237292194,
+        0.2528603766999554,
+        0.17867851632601095,
+        0.14070691054348283,
+        0.5871685259446543
+      ],
+      "n_cells_nonnull_per_seed": [
+        8,
+        7,
+        5,
+        8,
+        7,
+        8,
+        8,
+        7,
+        5,
+        8
+      ],
+      "n_grid_used_per_seed": [
+        8,
+        6,
+        4,
+        8,
+        6,
+        8,
+        8,
+        6,
+        4,
+        8
+      ],
+      "secs_total_median": 457.1441864967346,
+      "per_threshold": [
+        {
+          "sep_m": 3.996401258830591,
+          "abs_relerr_median": 0.14341660039976586,
+          "estimate_median": 0.009304788676054231,
+          "gamma": 0.434,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 3.5758754516763633,
+          "abs_relerr_median": 0.1670769735857039,
+          "estimate_median": 0.0038246230184914736,
+          "gamma": 0.38,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 3.138589853526058,
+          "abs_relerr_median": 0.155660778990437,
+          "estimate_median": 0.0014662075663738634,
+          "gamma": 0.32,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 2.7197904834697475,
+          "abs_relerr_median": 0.3271649223298548,
+          "estimate_median": 0.0005291211065033706,
+          "gamma": 0.26,
+          "n_nonnull": 10
+        },
+        {
+          "sep_m": 2.3057440656331596,
+          "abs_relerr_median": 0.21712819832616098,
+          "estimate_median": 0.00024149156921836405,
+          "gamma": 0.2,
+          "n_nonnull": 8
+        },
+        {
+          "sep_m": 1.878672873255449,
+          "abs_relerr_median": 0.29685417945593684,
+          "estimate_median": 0.0001085717158589679,
+          "gamma": 0.14,
+          "n_nonnull": 8
+        },
+        {
+          "sep_m": 1.4064216928154862,
+          "abs_relerr_median": 0.8387639839371699,
+          "estimate_median": 5.714312688543205e-05,
+          "gamma": 0.08,
+          "n_nonnull": 5
+        },
+        {
+          "sep_m": 0.4494665749754932,
+          "abs_relerr_median": 1.0,
+          "estimate_median": 5.674071980051577e-06,
+          "gamma": 0.0,
+          "n_nonnull": 10
+        }
+      ],
+      "n_grid_total": 8,
+      "n_evals_actual_median": 21904.0,
+      "n_contributing_ile": 10
+    }
+  }
+}

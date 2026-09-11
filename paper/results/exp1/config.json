@@ -1,0 +1,50 @@
+{
+  "Ks": [
+    10,
+    25,
+    50,
+    100
+  ],
+  "adaptive_quantile": 0.2,
+  "arms": [
+    "amortized",
+    "perthreshold"
+  ],
+  "batch_size_amortized": 1000,
+  "budget_accounting": "n_evals_actual recorded per arm per K; amortized = 1 run of B; perthreshold = K runs of B/K",
+  "budget_total": 25000,
+  "defensive_eta": 0.0,
+  "dimension": 2,
+  "experiment": "exp1_kscaling",
+  "grid_endpoints_P": [
+    0.001,
+    1.8222246957987997e-06
+  ],
+  "grid_note": "identical endpoints for every K; density is the only difference",
+  "ile_formula": "ILE = mean_{γ ∈ used} |log est(γ) − log truth(γ)|; used = {γ : est(γ) !== nothing && est(γ) > 0 && truth(γ) > 0}",
+  "max_weight_fit": 10.0,
+  "measured_quantity": "estimation error vs number of requested thresholds K at fixed total budget",
+  "n_iter_amortized": 25,
+  "n_mixture_components": 2,
+  "n_seeds": 10,
+  "problem": "unimodal_toy",
+  "problem_def": "rho = 3 - min(x1,x2), x ~ N(0,I2)",
+  "proposal_family": "JointModel(Normal(), ConditionalEMGMM(k=2))",
+  "quadrature_nodes": 1000,
+  "quadrature_note": "nodes=1000 (default quadrature resolution)",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "sigma_smoothing": 0.0,
+  "target_threshold": 0.0,
+  "truth": "P(rho<=g) = Phi(-(3-g))^2 (closed form)"
+}

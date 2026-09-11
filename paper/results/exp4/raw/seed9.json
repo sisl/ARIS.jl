@@ -1,0 +1,1068 @@
+{
+  "arm_a_primary": {
+    "ile_formula": "ILE = mean_{γ ∈ used} |log est(γ) − log truth(γ)|; used = {γ : est(γ) !== nothing && est(γ) > 0 && truth(γ) > 0}",
+    "n_cells_nonnull": 8,
+    "gamma_target": 0.0,
+    "tail_ess_gmax": 202.26248563894796,
+    "grid_gmin": 0.0,
+    "cov_cond_med": null,
+    "gamma_min": 0.3686555027961731,
+    "n_runs": 1,
+    "reached_target": false,
+    "n_evals_actual": 25000,
+    "fit_ess_raw": 0.11691302155706591,
+    "secs_sim_and_fit": 454.1856939792633,
+    "tail_ess_at_gamma_min": 56.150111759422536,
+    "secs_total": 2141.7693979740143,
+    "discovered": true,
+    "reference_P_at_gamma_min": 0.0031291153846153847,
+    "ile_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "fit_ess_reindex": 0.025483493213928177,
+    "grid_gmax": 0.434,
+    "numerical": {
+      "kmeans_fallback": 0,
+      "small_det": 0,
+      "fit_method": "em",
+      "small_mix": 0
+    },
+    "gamma_min_gap": 0.3686555027961731,
+    "sep_at_gamma_min": 3.491169267709217,
+    "per_threshold": [
+      {
+        "sep_m": 3.996401258830591,
+        "signed_relerr": -0.04354636682966915,
+        "reference_wilson_lo": 0.008628256906943355,
+        "truth": 0.008663807692307693,
+        "abs_relerr": 0.04354636682966915,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 0.008699503671274918,
+        "gamma": 0.434,
+        "estimate": 0.008286530344396753,
+        "reference_count": 225259,
+        "schedule_reached_this_threshold": true
+      },
+      {
+        "sep_m": 3.5758754516763633,
+        "signed_relerr": -0.023862812899951284,
+        "reference_wilson_lo": 0.0037529193062247708,
+        "truth": 0.003776423076923077,
+        "abs_relerr": 0.023862812899951284,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 0.0038000734854838026,
+        "gamma": 0.38,
+        "estimate": 0.0036863069996074032,
+        "reference_count": 98187,
+        "schedule_reached_this_threshold": true
+      },
+      {
+        "sep_m": 3.138589853526058,
+        "signed_relerr": -0.003352284926755061,
+        "reference_wilson_lo": 0.001417958920906886,
+        "truth": 0.001432423076923077,
+        "abs_relerr": 0.003352284926755061,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 0.0014470345634716153,
+        "gamma": 0.32,
+        "estimate": 0.0014276211866335717,
+        "reference_count": 37243,
+        "schedule_reached_this_threshold": false
+      },
+      {
+        "sep_m": 2.7197904834697475,
+        "signed_relerr": 0.1649537999868049,
+        "reference_wilson_lo": 0.0004911372868396154,
+        "truth": 0.0004996538461538462,
+        "abs_relerr": 0.1649537999868049,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 0.0005083180116408667,
+        "gamma": 0.26,
+        "estimate": 0.0005820736467549455,
+        "reference_count": 12991,
+        "schedule_reached_this_threshold": false
+      },
+      {
+        "sep_m": 2.3057440656331596,
+        "signed_relerr": -0.413940145637229,
+        "reference_wilson_lo": 0.00020594583162230414,
+        "truth": 0.00021146153846153846,
+        "abs_relerr": 0.413940145637229,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 0.00021712493663659344,
+        "gamma": 0.2,
+        "estimate": 0.00012392911843409673,
+        "reference_count": 5498,
+        "schedule_reached_this_threshold": false
+      },
+      {
+        "sep_m": 1.878672873255449,
+        "signed_relerr": -0.034803453639481466,
+        "reference_wilson_lo": 0.0001146913654504449,
+        "truth": 0.00011880769230769231,
+        "abs_relerr": 0.034803453639481466,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 0.00012307173788068062,
+        "gamma": 0.14,
+        "estimate": 0.00011467277429644776,
+        "reference_count": 3089,
+        "schedule_reached_this_threshold": false
+      },
+      {
+        "sep_m": 1.4064216928154862,
+        "signed_relerr": -0.6923315906857653,
+        "reference_wilson_lo": 2.900672248451583e-05,
+        "truth": 3.107692307692308e-05,
+        "abs_relerr": 0.6923315906857653,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 3.329486831018452e-05,
+        "gamma": 0.08,
+        "estimate": 9.561387489457757e-06,
+        "reference_count": 808,
+        "schedule_reached_this_threshold": false
+      },
+      {
+        "sep_m": 0.4494665749754932,
+        "signed_relerr": -0.6923315906857653,
+        "reference_wilson_lo": 2.900672248451583e-05,
+        "truth": 3.107692307692308e-05,
+        "abs_relerr": 0.6923315906857653,
+        "contributes_to_ile": true,
+        "reference_wilson_hi": 3.329486831018452e-05,
+        "gamma": 0.0,
+        "estimate": 9.561387489457757e-06,
+        "reference_count": 808,
+        "schedule_reached_this_threshold": false
+      }
+    ],
+    "secs_reindex": 1687.583703994751,
+    "n_grid_total": 8,
+    "ile": 0.3939920837895572,
+    "n_grid_used": 8,
+    "reporting_gate_removed": true,
+    "estimator": "balance-MIS (pooled over all K proposals) - UNCHANGED"
+  },
+  "raw_state_key": "seed9",
+  "arm_c_ams": {
+    "ile_formula": "ILE = mean_{γ ∈ used} |log est(γ) − log truth(γ)|; used = {γ : est(γ) !== nothing && est(γ) > 0 && truth(γ) > 0}",
+    "n_cells_nonnull": 5,
+    "n_evals_note": "evaluations include MCMC moves",
+    "n_evals_all_configs": 116580,
+    "n_runs": 6,
+    "selected": {
+      "nmcmc": 10,
+      "rng_seed": 9511,
+      "m": 148,
+      "nevals": 21904,
+      "k_max": 8,
+      "sigma_used": 0.19432618626079878,
+      "oracle_error": 0.13764925552580506,
+      "p0": 0.3,
+      "acceptance_rate": 0.15472972972972973
+    },
+    "n_evals_actual": 21904,
+    "secs_total": 454.9819538593292,
+    "ile_mask": [
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    "per_threshold": [
+      {
+        "truth": 0.008663807692307693,
+        "abs_relerr": 0.058734613419842555,
+        "contributes_to_ile": true,
+        "gamma": 0.434,
+        "estimate": 0.008154942296756142,
+        "signed_relerr": -0.058734613419842555,
+        "provenance": "interpolated"
+      },
+      {
+        "truth": 0.003776423076923077,
+        "abs_relerr": 0.007570173208111503,
+        "contributes_to_ile": true,
+        "gamma": 0.38,
+        "estimate": 0.003805011253722494,
+        "signed_relerr": 0.007570173208111503,
+        "provenance": "interpolated"
+      },
+      {
+        "truth": 0.001432423076923077,
+        "abs_relerr": 0.14662997354327367,
+        "contributes_to_ile": true,
+        "gamma": 0.32,
+        "estimate": 0.0016424592347950824,
+        "signed_relerr": 0.14662997354327367,
+        "provenance": "interpolated"
+      },
+      {
+        "truth": 0.0004996538461538462,
+        "abs_relerr": 0.43036355111329944,
+        "contributes_to_ile": true,
+        "gamma": 0.26,
+        "estimate": 0.0007146866497120336,
+        "signed_relerr": 0.43036355111329944,
+        "provenance": "interpolated"
+      },
+      {
+        "truth": 0.00021146153846153846,
+        "abs_relerr": null,
+        "contributes_to_ile": false,
+        "gamma": 0.2,
+        "estimate": null,
+        "signed_relerr": null,
+        "provenance": "degenerate"
+      },
+      {
+        "truth": 0.00011880769230769231,
+        "abs_relerr": null,
+        "contributes_to_ile": false,
+        "gamma": 0.14,
+        "estimate": null,
+        "signed_relerr": null,
+        "provenance": "degenerate"
+      },
+      {
+        "truth": 3.107692307692308e-05,
+        "abs_relerr": null,
+        "contributes_to_ile": false,
+        "gamma": 0.08,
+        "estimate": null,
+        "signed_relerr": null,
+        "provenance": "degenerate"
+      },
+      {
+        "truth": 3.107692307692308e-05,
+        "abs_relerr": 1.0,
+        "contributes_to_ile": false,
+        "gamma": 0.0,
+        "estimate": 0.0,
+        "signed_relerr": -1.0,
+        "provenance": "exact_level"
+      }
+    ],
+    "n_grid_total": 8,
+    "ile": 0.14070691054348283,
+    "n_grid_used": 4,
+    "n_valid_candidates": 6,
+    "sigma_rule": "rwm_sigma(d) = 2.38/sqrt(d)",
+    "sigma_used": 0.19432618626079878,
+    "acceptance_rate_selected": 0.15472972972972973,
+    "threshold_note": "The reference sample contains the same 808 events at gamma=0.08 and gamma=0, but the two thresholds are not mathematically identical under the simulator definition. A narrow non-collision separation interval ([1.4000, 1.4064] m centre-to-centre) can in principle satisfy rho <= 0.08. We therefore evaluate the two thresholds independently.",
+    "candidates": [
+      {
+        "p0": 0.1,
+        "nmcmc": 5,
+        "m": 284,
+        "k_max": 8,
+        "rng_seed": 9166,
+        "nevals": 12780,
+        "valid": true,
+        "oracle_error": 0.5309309683908532,
+        "n_nonfinite_errors": 0,
+        "n_positive_estimates": 8,
+        "estimates": {
+          "0.2": 0.00010871518871629997,
+          "0.434": 0.0037329226423868755,
+          "0.32": 0.000704360892931013,
+          "0.26": 0.0002767213894865676,
+          "0.14": 5.2188543734058404e-05,
+          "0.08": 2.569834327751248e-05,
+          "0.0": 9.992597387913792e-06,
+          "0.38": 0.0017150500451841278
+        },
+        "provenance": {
+          "0.2": "interpolated",
+          "0.434": "interpolated",
+          "0.32": "interpolated",
+          "0.26": "interpolated",
+          "0.14": "interpolated",
+          "0.08": "interpolated",
+          "0.0": "exact_level",
+          "0.38": "interpolated"
+        },
+        "diag": {
+          "mutations_attempted": 5680,
+          "m_elite": 28,
+          "sigma_rule": "2.38/sqrt(d)",
+          "n_nonfinite_Y": 0,
+          "mean_unique_fraction": 0.6302816901408451,
+          "acceptance_rate": 0.13714788732394367,
+          "d": 150,
+          "nmcmc": 5,
+          "mutations_accepted": 779,
+          "proposal_displacement": 2.38,
+          "unique_rho_per_level": [
+            284,
+            217,
+            168,
+            123,
+            103
+          ],
+          "m": 284,
+          "sigma_used": 0.19432618626079878,
+          "n_levels": 5
+        }
+      },
+      {
+        "p0": 0.1,
+        "nmcmc": 10,
+        "m": 148,
+        "k_max": 8,
+        "rng_seed": 9171,
+        "nevals": 15688,
+        "valid": true,
+        "oracle_error": 0.9158300881130386,
+        "n_nonfinite_errors": 0,
+        "n_positive_estimates": 8,
+        "estimates": {
+          "0.2": 7.152884827412605e-06,
+          "0.434": 0.006700801608504084,
+          "0.32": 0.00016225262572283156,
+          "0.26": 1.0562109651603647e-05,
+          "0.14": 4.844085418717581e-06,
+          "0.08": 3.2805174569433516e-06,
+          "0.0": 1.9509662972616367e-06,
+          "0.38": 0.0016201941907453994
+        },
+        "provenance": {
+          "0.2": "interpolated",
+          "0.434": "interpolated",
+          "0.32": "interpolated",
+          "0.26": "interpolated",
+          "0.14": "interpolated",
+          "0.08": "interpolated",
+          "0.0": "exact_level",
+          "0.38": "interpolated"
+        },
+        "diag": {
+          "mutations_attempted": 7400,
+          "m_elite": 15,
+          "sigma_rule": "2.38/sqrt(d)",
+          "n_nonfinite_Y": 0,
+          "mean_unique_fraction": 0.8141891891891891,
+          "acceptance_rate": 0.14040540540540541,
+          "d": 150,
+          "nmcmc": 10,
+          "mutations_accepted": 1039,
+          "proposal_displacement": 2.38,
+          "unique_rho_per_level": [
+            148,
+            144,
+            140,
+            101,
+            111,
+            79
+          ],
+          "m": 148,
+          "sigma_used": 0.19432618626079878,
+          "n_levels": 6
+        }
+      },
+      {
+        "p0": 0.2,
+        "nmcmc": 5,
+        "m": 284,
+        "k_max": 8,
+        "rng_seed": 9336,
+        "nevals": 22152,
+        "valid": true,
+        "oracle_error": 0.5837329331935097,
+        "n_nonfinite_errors": 0,
+        "n_positive_estimates": 8,
+        "estimates": {
+          "0.2": 4.2149143555203856e-05,
+          "0.434": 0.013202851767239438,
+          "0.32": 0.00215433323475819,
+          "0.26": 0.00022081967025443737,
+          "0.14": 1.8295559582597277e-05,
+          "0.08": 1.3739825100434049e-05,
+          "0.0": 1.2386409239363229e-05,
+          "0.38": 0.006728964537770848
+        },
+        "provenance": {
+          "0.2": "interpolated",
+          "0.434": "interpolated",
+          "0.32": "interpolated",
+          "0.26": "interpolated",
+          "0.14": "interpolated",
+          "0.08": "interpolated",
+          "0.0": "exact_level",
+          "0.38": "interpolated"
+        },
+        "diag": {
+          "mutations_attempted": 9940,
+          "m_elite": 57,
+          "sigma_rule": "2.38/sqrt(d)",
+          "n_nonfinite_Y": 0,
+          "mean_unique_fraction": 0.6201584507042254,
+          "acceptance_rate": 0.12977867203219315,
+          "d": 150,
+          "nmcmc": 5,
+          "mutations_accepted": 1290,
+          "proposal_displacement": 2.38,
+          "unique_rho_per_level": [
+            284,
+            240,
+            231,
+            221,
+            173,
+            136,
+            106,
+            18
+          ],
+          "m": 284,
+          "sigma_used": 0.19432618626079878,
+          "n_levels": 8
+        }
+      },
+      {
+        "p0": 0.2,
+        "nmcmc": 10,
+        "m": 148,
+        "k_max": 8,
+        "rng_seed": 9341,
+        "nevals": 21904,
+        "valid": true,
+        "oracle_error": 0.9222738538455684,
+        "n_nonfinite_errors": 0,
+        "n_positive_estimates": 8,
+        "estimates": {
+          "0.2": 9.03519485780199e-06,
+          "0.434": 0.012357845701856674,
+          "0.32": 0.00030199697296157547,
+          "0.26": 2.089027320981326e-05,
+          "0.14": 5.390356149045019e-06,
+          "0.08": 3.215861956586063e-06,
+          "0.0": 1.615116973627847e-06,
+          "0.38": 0.0030016190023820404
+        },
+        "provenance": {
+          "0.2": "interpolated",
+          "0.434": "interpolated",
+          "0.32": "interpolated",
+          "0.26": "interpolated",
+          "0.14": "interpolated",
+          "0.08": "interpolated",
+          "0.0": "exact_level",
+          "0.38": "interpolated"
+        },
+        "diag": {
+          "mutations_attempted": 10360,
+          "m_elite": 30,
+          "sigma_rule": "2.38/sqrt(d)",
+          "n_nonfinite_Y": 0,
+          "mean_unique_fraction": 0.8614864864864865,
+          "acceptance_rate": 0.14324324324324325,
+          "d": 150,
+          "nmcmc": 10,
+          "mutations_accepted": 1484,
+          "proposal_displacement": 2.38,
+          "unique_rho_per_level": [
+            148,
+            144,
+            135,
+            136,
+            128,
+            127,
+            109,
+            93
+          ],
+          "m": 148,
+          "sigma_used": 0.19432618626079878,
+          "n_levels": 8
+        }
+      },
+      {
+        "p0": 0.3,
+        "nmcmc": 5,
+        "m": 284,
+        "k_max": 8,
+        "rng_seed": 9506,
+        "nevals": 22152,
+        "valid": true,
+        "oracle_error": 0.9863011791763494,
+        "n_nonfinite_errors": 0,
+        "n_positive_estimates": 8,
+        "estimates": {
+          "0.2": 0.00015724187052295436,
+          "0.434": 0.020912814510722317,
+          "0.32": 0.003243003942312786,
+          "0.26": 0.00021710491944055275,
+          "0.14": 0.00011388505571071477,
+          "0.08": 8.24831571330057e-05,
+          "0.0": 5.364920925003748e-05,
+          "0.38": 0.01074291001152717
+        },
+        "provenance": {
+          "0.2": "interpolated",
+          "0.434": "interpolated",
+          "0.32": "interpolated",
+          "0.26": "interpolated",
+          "0.14": "interpolated",
+          "0.08": "interpolated",
+          "0.0": "exact_level",
+          "0.38": "interpolated"
+        },
+        "diag": {
+          "mutations_attempted": 9940,
+          "m_elite": 85,
+          "sigma_rule": "2.38/sqrt(d)",
+          "n_nonfinite_Y": 0,
+          "mean_unique_fraction": 0.7684859154929577,
+          "acceptance_rate": 0.16338028169014085,
+          "d": 150,
+          "nmcmc": 5,
+          "mutations_accepted": 1624,
+          "proposal_displacement": 2.38,
+          "unique_rho_per_level": [
+            284,
+            256,
+            252,
+            241,
+            221,
+            208,
+            161,
+            123
+          ],
+          "m": 284,
+          "sigma_used": 0.19432618626079878,
+          "n_levels": 8
+        }
+      },
+      {
+        "p0": 0.3,
+        "nmcmc": 10,
+        "m": 148,
+        "k_max": 8,
+        "rng_seed": 9511,
+        "nevals": 21904,
+        "valid": true,
+        "oracle_error": 0.13764925552580506,
+        "n_nonfinite_errors": 0,
+        "n_positive_estimates": 4,
+        "estimates": {
+          "0.2": null,
+          "0.434": 0.008154942296756142,
+          "0.32": 0.0016424592347950824,
+          "0.26": 0.0007146866497120336,
+          "0.14": null,
+          "0.08": null,
+          "0.0": 0.0,
+          "0.38": 0.003805011253722494
+        },
+        "provenance": {
+          "0.2": "degenerate",
+          "0.434": "interpolated",
+          "0.32": "interpolated",
+          "0.26": "interpolated",
+          "0.14": "degenerate",
+          "0.08": "degenerate",
+          "0.0": "exact_level",
+          "0.38": "interpolated"
+        },
+        "diag": {
+          "mutations_attempted": 10360,
+          "m_elite": 44,
+          "sigma_rule": "2.38/sqrt(d)",
+          "n_nonfinite_Y": 0,
+          "mean_unique_fraction": 0.9180743243243243,
+          "acceptance_rate": 0.15472972972972973,
+          "d": 150,
+          "nmcmc": 10,
+          "mutations_accepted": 1603,
+          "proposal_displacement": 2.38,
+          "unique_rho_per_level": [
+            148,
+            148,
+            143,
+            139,
+            136,
+            137,
+            116,
+            120
+          ],
+          "m": 148,
+          "sigma_used": 0.19432618626079878,
+          "n_levels": 8
+        }
+      }
+    ]
+  },
+  "gamma_grid": [
+    0.434,
+    0.38,
+    0.32,
+    0.26,
+    0.2,
+    0.14,
+    0.08,
+    0.0
+  ],
+  "arm_b_perthreshold": {
+    "ile_formula": "ILE = mean_{γ ∈ used} |log est(γ) − log truth(γ)|; used = {γ : est(γ) !== nothing && est(γ) > 0 && truth(γ) > 0}",
+    "n_cells_nonnull": 8,
+    "n_evals_note": "oracle tuning evaluates 2 candidate N per threshold; ALL counted",
+    "n_runs": 16,
+    "selected_N": {
+      "0.2": 1000,
+      "0.434": 500,
+      "0.32": 1000,
+      "0.26": 1000,
+      "0.14": 500,
+      "0.08": 500,
+      "0.0": 500,
+      "0.38": 1000
+    },
+    "n_evals_actual": 48000,
+    "secs_total": 436.68135809898376,
+    "per_threshold_budget": 3125,
+    "ile_mask": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false
+    ],
+    "per_threshold": [
+      {
+        "truth": 0.008663807692307693,
+        "abs_relerr": 0.7306771702622455,
+        "contributes_to_ile": true,
+        "gamma": 0.434,
+        "estimate": 0.002333361203996032,
+        "signed_relerr": -0.7306771702622455
+      },
+      {
+        "truth": 0.003776423076923077,
+        "abs_relerr": 0.5581010639713483,
+        "contributes_to_ile": true,
+        "gamma": 0.38,
+        "estimate": 0.0016687973396863546,
+        "signed_relerr": -0.5581010639713483
+      },
+      {
+        "truth": 0.001432423076923077,
+        "abs_relerr": 0.5345875758171968,
+        "contributes_to_ile": true,
+        "gamma": 0.32,
+        "estimate": 0.0006666674966861592,
+        "signed_relerr": -0.5345875758171968
+      },
+      {
+        "truth": 0.0004996538461538462,
+        "abs_relerr": 0.3342570497909796,
+        "contributes_to_ile": true,
+        "gamma": 0.26,
+        "estimate": 0.0006666666666859468,
+        "signed_relerr": 0.3342570497909796
+      },
+      {
+        "truth": 0.00021146153846153846,
+        "abs_relerr": 0.9999987983095853,
+        "contributes_to_ile": true,
+        "gamma": 0.2,
+        "estimate": 2.541113038508532e-10,
+        "signed_relerr": -0.9999987983095853
+      },
+      {
+        "truth": 0.00011880769230769231,
+        "abs_relerr": 1.0,
+        "contributes_to_ile": false,
+        "gamma": 0.14,
+        "estimate": 0.0,
+        "signed_relerr": -1.0
+      },
+      {
+        "truth": 3.107692307692308e-05,
+        "abs_relerr": 1.0,
+        "contributes_to_ile": false,
+        "gamma": 0.08,
+        "estimate": 0.0,
+        "signed_relerr": -1.0
+      },
+      {
+        "truth": 3.107692307692308e-05,
+        "abs_relerr": 1.0,
+        "contributes_to_ile": false,
+        "gamma": 0.0,
+        "estimate": 0.0,
+        "signed_relerr": -1.0
+      }
+    ],
+    "n_grid_total": 8,
+    "ile": 3.362701169828402,
+    "n_grid_used": 5,
+    "secs_total_note": "the 10 seeds of this arm ran concurrently on one host; wall-clock time is not comparable across arms",
+    "rng_rule": "seed*100_000 + (gamma_index-1)*10 + candidate",
+    "candidate_provenance": [
+      {
+        "gamma": 0.434,
+        "gamma_index": 1,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900001,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.002333361203996032,
+        "rel_err_vs_reference": 0.7326037706653818,
+        "x_sha256": "e1b6ed05e7edaa8346faf833dd8d757f5e291c6def385c07ddfb8e71b302432e",
+        "rho_sha256": "b1d1e016756b65ee610fb7f66cffdee791b8aa0cd4ef2b79fc143ee37b38606d"
+      },
+      {
+        "gamma": 0.434,
+        "gamma_index": 1,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900002,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.001684894172500314,
+        "rel_err_vs_reference": 0.806916156922946,
+        "x_sha256": "7502184da54839a67e8f52e086e84c638b1bc797680b9ae7837f9cb98cc5c54b",
+        "rho_sha256": "09ff7882854f229d4adbedda5136e5e65461e6d0dbf18cc80a6a10b5e7e3aecf"
+      },
+      {
+        "gamma": 0.38,
+        "gamma_index": 2,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900011,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 2.1649764411781206e-09,
+        "rel_err_vs_reference": 0.9999994316155313,
+        "x_sha256": "d3b6765f846bb2a57a15a6fe801e1f0dec4c194fb56b39396203fbb6f31de415",
+        "rho_sha256": "a4460dce09be97758a95c50cee325023cf8e41fee2c02fd64c3fe5a89abba9f3"
+      },
+      {
+        "gamma": 0.38,
+        "gamma_index": 2,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900012,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0016687973396863546,
+        "rel_err_vs_reference": 0.561880456895155,
+        "x_sha256": "a5995c5523a58cd5b36c2a6743a83a0f712591c3f326d04d2f41e88b2bf61855",
+        "rho_sha256": "53ac0e2fe6cb538c6603005a50ae64fdb2198a3496e48b72b7c3229008e918d7"
+      },
+      {
+        "gamma": 0.32,
+        "gamma_index": 3,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900021,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0003334287639447102,
+        "rel_err_vs_reference": 0.7690505937458384,
+        "x_sha256": "a1c316e412b88323ffcc554eed8e58676cf04fc4361d80974c0d346d9a4aaae8",
+        "rho_sha256": "5e99d5e5ac430b734eb0071634a25e16af0f17f102dfa9d5ac3ada7f74cbcc4e"
+      },
+      {
+        "gamma": 0.32,
+        "gamma_index": 3,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900022,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0006666674966861592,
+        "rel_err_vs_reference": 0.5382328125891749,
+        "x_sha256": "7e4e91b2db63fd75f833d61f394ba1da93b70ecc04a96abed37c471fd8d1f875",
+        "rho_sha256": "da7166c48d1c09ed056df95c1a0a48a267c4c26fbddd7e0734b2ec5dd8a173de"
+      },
+      {
+        "gamma": 0.26,
+        "gamma_index": 4,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900031,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 6.752211908090527e-17,
+        "rel_err_vs_reference": 0.9999999999998672,
+        "x_sha256": "60007e707a660d5e99d0acadfd1815659eba55d417fe32e1388720c8a833ff0c",
+        "rho_sha256": "c630a1a07b6ddf12111ff6db257fe8f906494f91cc4847d9e933fe48b1ed406e"
+      },
+      {
+        "gamma": 0.26,
+        "gamma_index": 4,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900032,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0006666666666859468,
+        "rel_err_vs_reference": 0.31015369114396185,
+        "x_sha256": "ecdfa6d869c49a424bcd874d38621a09437c598f2a6e71e10f81e043fcd15e5a",
+        "rho_sha256": "25b7f28fcfbe27d2629b2df1563342a93cbd44b07acbb67c0de6bf7a9f895e39"
+      },
+      {
+        "gamma": 0.2,
+        "gamma_index": 5,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900041,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 1.782842970476928e-15,
+        "rel_err_vs_reference": 0.9999999999916087,
+        "x_sha256": "e5caf9444663da0b10bdee9ef9c756390b4d0b3e694c1db3ab7bf1946bd557dc",
+        "rho_sha256": "dc908410b8f109a32a4cd6f0b38fc1ec0de2801e3b747116e6235cd65c7e7d6e"
+      },
+      {
+        "gamma": 0.2,
+        "gamma_index": 5,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900042,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 2.541113038508532e-10,
+        "rel_err_vs_reference": 0.9999988039656227,
+        "x_sha256": "793adb8ac1f5fa2460ac9c431138b86359efb172a11738d0ab6c5269de9d9eb4",
+        "rho_sha256": "330a1901bd473a86611f3d682f6b64f953c732a00f6f24d9d5f4e538ed6dd2be"
+      },
+      {
+        "gamma": 0.14,
+        "gamma_index": 6,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900051,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0,
+        "rel_err_vs_reference": 1.0,
+        "x_sha256": "38f0997c45272ec1979e9ba4e0699656e6bf796cea81d4f9bf9ad21a940c78b3",
+        "rho_sha256": "36793486c0533d2c573b047e74d2ec421528dc4685b0c63f555128b8abc32a54"
+      },
+      {
+        "gamma": 0.14,
+        "gamma_index": 6,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900052,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0,
+        "rel_err_vs_reference": 1.0,
+        "x_sha256": "c1eadf8b7a1ed8c91392645f57baded46f8939d27d20fb42193b9d6a8b6e23b3",
+        "rho_sha256": "0dfeaa99359dd0cb06991ccf006043f9ff5e4eee9d81f19c07872211aae62953"
+      },
+      {
+        "gamma": 0.08,
+        "gamma_index": 7,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900061,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0,
+        "rel_err_vs_reference": 1.0,
+        "x_sha256": "4cef689c0efe9f8d9dfdaa72460cfb4c1a9a51317572f3920e7e297171dd220a",
+        "rho_sha256": "9373d1f10d7dc741c740064d17271d78a7f10ed4ed53c748e3abe14c893ebc06"
+      },
+      {
+        "gamma": 0.08,
+        "gamma_index": 7,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900062,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0,
+        "rel_err_vs_reference": 1.0,
+        "x_sha256": "2f8d885a2c2d96def58c69e876fe1029ea584efe312832956980edef1b47b18b",
+        "rho_sha256": "98c864363240d81887b11de3122de2db47cff2afaf08a823046c5e222e554581"
+      },
+      {
+        "gamma": 0.0,
+        "gamma_index": 8,
+        "candidate": 1,
+        "N": 500,
+        "n_iter": 6,
+        "rng_seed": 900071,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0,
+        "rel_err_vs_reference": 1.0,
+        "x_sha256": "4e848bc5ef6db1fc0663c8ab34573e1a8d4fe5141c2eb92bcf669cb6b88260c9",
+        "rho_sha256": "aa0af870a535c955f90a6064c078e01d94af97b3cd764bdde84b8ee880eb26a0"
+      },
+      {
+        "gamma": 0.0,
+        "gamma_index": 8,
+        "candidate": 2,
+        "N": 1000,
+        "n_iter": 3,
+        "rng_seed": 900072,
+        "actual_evals": 3000,
+        "nominal_charged_evals": 3000,
+        "estimate": 0.0,
+        "rel_err_vs_reference": 1.0,
+        "x_sha256": "d95c0b86b6ec9e297453414aed3c2f14a529cbf8004d2ce7b90b18f1985045d0",
+        "rho_sha256": "3419ce8871c3694678d44eb894177634e94f8dd35a4d5d58692f1d36a4a0a59f"
+      }
+    ],
+    "distinct_evals_actual": 48000
+  },
+  "raw_state_runs": 1,
+  "d": 150,
+  "arms": "abc",
+  "gpd_tail": {
+    "anchors": [
+      {
+        "P_u": 0.0009135491786548758,
+        "unconstrained": {
+          "sigma": 0.028300742376386228,
+          "n_eff": 4.831014724065506,
+          "xi": 0.012612476715321433,
+          "estimate": 1.1844397414668704e-07
+        },
+        "quantile": 0.02,
+        "u": 0.26816175460815433,
+        "sep_u_m": 2.7761553311434084,
+        "n_exceedances_raw": 500,
+        "xi_nonneg": {
+          "sigma": 0.028303489183119958,
+          "n_eff": 4.831014724065506,
+          "xi": 0.012558901201623462,
+          "estimate": 1.1829643804254391e-07
+        }
+      },
+      {
+        "P_u": 0.0013110090546526885,
+        "unconstrained": {
+          "sigma": 0.057764127832266844,
+          "n_eff": 9.237693767526428,
+          "xi": -0.1344788518429107,
+          "estimate": 1.138523285611829e-07
+        },
+        "quantile": 0.05,
+        "u": 0.3074027955532074,
+        "sep_u_m": 3.049566575503548,
+        "n_exceedances_raw": 1250,
+        "xi_nonneg": {
+          "sigma": 0.05176739207856917,
+          "n_eff": 9.237693767526428,
+          "xi": 0.0,
+          "estimate": 3.456987135953751e-06
+        }
+      },
+      {
+        "P_u": 0.002526349463491695,
+        "unconstrained": {
+          "sigma": 0.05916937377122191,
+          "n_eff": 26.288889175062035,
+          "xi": -0.11939793039371696,
+          "estimate": 1.2936317033915924e-07
+        },
+        "quantile": 0.1,
+        "u": 0.3432288408279419,
+        "sep_u_m": 3.304971761303256,
+        "n_exceedances_raw": 2500,
+        "xi_nonneg": {
+          "sigma": 0.05315279948617437,
+          "n_eff": 26.288889175062035,
+          "xi": 0.0,
+          "estimate": 3.9635160239418155e-06
+        }
+      },
+      {
+        "P_u": 0.005029150369239992,
+        "unconstrained": {
+          "sigma": 0.07185925139250263,
+          "n_eff": 62.38775639852354,
+          "xi": -0.14966496925776326,
+          "estimate": 6.159895592671395e-08
+        },
+        "quantile": 0.2,
+        "u": 0.3917813420295715,
+        "sep_u_m": 3.6650499951883493,
+        "n_exceedances_raw": 5000,
+        "xi_nonneg": {
+          "sigma": 0.06300022933416602,
+          "n_eff": 62.38775639852354,
+          "xi": 0.0,
+          "estimate": 1.001693852891735e-05
+        }
+      },
+      {
+        "P_u": 0.008653520796133189,
+        "unconstrained": {
+          "sigma": 0.07237299736706901,
+          "n_eff": 113.74327663935314,
+          "xi": -0.12583464842120415,
+          "estimate": 1.6611077123450212e-07
+        },
+        "quantile": 0.3,
+        "u": 0.4285078167915344,
+        "sep_u_m": 3.9521353560023855,
+        "n_exceedances_raw": 7500,
+        "xi_nonneg": {
+          "sigma": 0.06432221702672372,
+          "n_eff": 113.74327663935314,
+          "xi": 0.0,
+          "estimate": 1.1065444618509526e-05
+        }
+      }
+    ],
+    "note": "unconstrained and xi>=0 fitted to the SAME buffer at PREDEFINED anchors; no anchor selected using ground truth",
+    "xi_nonneg_anchor_spread_ratio": 93.53996452987003,
+    "xi_nonneg_estimate_range": [
+      1.1829643804254391e-07,
+      1.1065444618509526e-05
+    ],
+    "anchor_quantiles": [
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "target_gamma": 0.0,
+    "reference_at_target": 3.107692307692308e-05,
+    "unconstrained_anchor_spread_ratio": 2.6966491352893853,
+    "unconstrained_estimate_range": [
+      6.159895592671395e-08,
+      1.6611077123450212e-07
+    ]
+  },
+  "budget": 25000,
+  "ok": true,
+  "raw_state_models": 1,
+  "seed": 9,
+  "raw_state_bytes": 31000000
+}

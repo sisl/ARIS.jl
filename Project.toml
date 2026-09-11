@@ -1,0 +1,29 @@
+name = "ARIS"
+uuid = "0b8de057-cb0d-4b1a-91d7-07cc9cdc0c12"
+version = "0.1.0"
+authors = ["hdelecki <hdelecki@stanford.edu> and contributors"]
+
+[deps]
+BSON = "fbb218c0-5317-5bc6-957e-2ee96dd4b1f0"
+Clustering = "aaaa29a8-35af-508c-8bc3-b662a17a0fe5"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+ExpectationMaximization = "e1fe09cc-5134-44c2-a941-50f4cd97986a"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+Parameters = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+
+[compat]
+Distributions = "0.25.117"
+ExpectationMaximization = "0.2"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

@@ -1,0 +1,590 @@
+{
+  "group": "exp4_idm",
+  "metric_definition": {
+    "rule": "P~ = P^ if finite and > 0, else 1/B; valid estimates never modified; no upper clamp",
+    "ile": "mean over all grid points with truth > 0 of |log P~ - log truth|",
+    "coverage": "fraction of grid points with a finite positive estimate",
+    "floor": "1/B, where B is the charged simulator-evaluation count of the arm and seed",
+    "appendix_floors_only": [
+      1e-06,
+      1e-08
+    ]
+  },
+  "budget_policy": {
+    "arm_a_primary": {
+      "field": "n_evals_actual",
+      "rationale": "single adaptive run"
+    },
+    "arm_b_perthreshold": {
+      "field": "n_evals_actual",
+      "rationale": "every oracle candidate is charged (2 N per threshold)"
+    },
+    "arm_c_ams": {
+      "field": "n_evals_all_configs",
+      "rationale": "all six oracle configurations are charged; the cost varies by seed with the number of AMS levels"
+    }
+  },
+  "cells": {
+    "arm_a_primary": {
+      "cell": "all",
+      "arm": "arm_a_primary",
+      "B_actual_field": "n_evals_actual",
+      "B_actual_rationale": "single adaptive run",
+      "B_actual_median": 25000.0,
+      "B_actual_min": 25000,
+      "B_actual_max": 25000,
+      "B_actual_per_seed": [
+        25000,
+        25000,
+        25000,
+        25000,
+        25000,
+        25000,
+        25000,
+        25000,
+        25000,
+        25000
+      ],
+      "B_actual_constant_across_seeds": true,
+      "floor_primary_median": 4e-05,
+      "n_seeds": 10,
+      "ile_primary_median": 0.4837577190023191,
+      "ile_primary_per_seed": [
+        0.45459117397714843,
+        0.8862211604519926,
+        0.6618774761643809,
+        0.5129242640274898,
+        0.39097927289605006,
+        0.3199191996246813,
+        0.5193672997322233,
+        0.5937214500688486,
+        0.3939920837895572,
+        0.3060302443492642
+      ],
+      "coverage_median": 1.0,
+      "coverage_min": 1.0,
+      "coverage_max": 1.0,
+      "coverage_per_seed": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "n_seeds_zero_coverage": 0,
+      "n_seeds_any_estimate": 10,
+      "n_seeds_full_coverage": 10,
+      "ile_conditional_on_any_estimate_median": 0.4837577190023191,
+      "n_grid": 8,
+      "appendix": {
+        "1e-06": {
+          "ile_median": 0.4837577190023191
+        },
+        "1e-08": {
+          "ile_median": 0.4837577190023191
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 1,
+          "B": 25000,
+          "ile": 0.45459117397714843,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.45459117397714843,
+            "1e-08": 0.45459117397714843
+          }
+        },
+        {
+          "seed": 2,
+          "B": 25000,
+          "ile": 0.8862211604519926,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.8862211604519926,
+            "1e-08": 0.8862211604519926
+          }
+        },
+        {
+          "seed": 3,
+          "B": 25000,
+          "ile": 0.6618774761643809,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.6618774761643809,
+            "1e-08": 0.6618774761643809
+          }
+        },
+        {
+          "seed": 4,
+          "B": 25000,
+          "ile": 0.5129242640274898,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.5129242640274898,
+            "1e-08": 0.5129242640274898
+          }
+        },
+        {
+          "seed": 5,
+          "B": 25000,
+          "ile": 0.39097927289605006,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.39097927289605006,
+            "1e-08": 0.39097927289605006
+          }
+        },
+        {
+          "seed": 6,
+          "B": 25000,
+          "ile": 0.3199191996246813,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.3199191996246813,
+            "1e-08": 0.3199191996246813
+          }
+        },
+        {
+          "seed": 7,
+          "B": 25000,
+          "ile": 0.5193672997322233,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.5193672997322233,
+            "1e-08": 0.5193672997322233
+          }
+        },
+        {
+          "seed": 8,
+          "B": 25000,
+          "ile": 0.5937214500688486,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.5937214500688486,
+            "1e-08": 0.5937214500688486
+          }
+        },
+        {
+          "seed": 9,
+          "B": 25000,
+          "ile": 0.3939920837895572,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.3939920837895572,
+            "1e-08": 0.3939920837895572
+          }
+        },
+        {
+          "seed": 10,
+          "B": 25000,
+          "ile": 0.3060302443492642,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.3060302443492642,
+            "1e-08": 0.3060302443492642
+          }
+        }
+      ]
+    },
+    "arm_b_perthreshold": {
+      "cell": "all",
+      "arm": "arm_b_perthreshold",
+      "B_actual_field": "n_evals_actual",
+      "B_actual_rationale": "every oracle candidate is charged (2 N per threshold)",
+      "B_actual_median": 48000.0,
+      "B_actual_min": 48000,
+      "B_actual_max": 48000,
+      "B_actual_per_seed": [
+        48000,
+        48000,
+        48000,
+        48000,
+        48000,
+        48000,
+        48000,
+        48000,
+        48000,
+        48000
+      ],
+      "B_actual_constant_across_seeds": true,
+      "floor_primary_median": 2.0833333333333333e-05,
+      "n_seeds": 10,
+      "ile_primary_median": 3.497808260322701,
+      "ile_primary_per_seed": [
+        4.226859170718687,
+        4.916391234153397,
+        5.690916571112214,
+        2.1913988900173194,
+        5.7444100829598375,
+        11.535041502558657,
+        0.9424853518444775,
+        2.768757349926715,
+        2.4192850301019497,
+        2.6346371118614793
+      ],
+      "coverage_median": 0.6875,
+      "coverage_min": 0.625,
+      "coverage_max": 0.875,
+      "coverage_per_seed": [
+        0.75,
+        0.75,
+        0.75,
+        0.625,
+        0.75,
+        0.875,
+        0.625,
+        0.625,
+        0.625,
+        0.625
+      ],
+      "n_seeds_zero_coverage": 0,
+      "n_seeds_any_estimate": 10,
+      "n_seeds_full_coverage": 0,
+      "ile_conditional_on_any_estimate_median": 3.497808260322701,
+      "n_grid": 8,
+      "appendix": {
+        "1e-06": {
+          "ile_median": 4.446731469095903
+        },
+        "1e-08": {
+          "ile_median": 5.885847152217182
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 1,
+          "B": 48000,
+          "ile": 4.226859170718687,
+          "n_pos": 6,
+          "n_grid": 8,
+          "coverage": 0.75,
+          "appendix": {
+            "1e-06": 4.985997737737248,
+            "1e-08": 6.137290284234272
+          }
+        },
+        {
+          "seed": 2,
+          "B": 48000,
+          "ile": 4.916391234153397,
+          "n_pos": 6,
+          "n_grid": 8,
+          "coverage": 0.75,
+          "appendix": {
+            "1e-06": 5.675529801171958,
+            "1e-08": 6.8268223476689815
+          }
+        },
+        {
+          "seed": 3,
+          "B": 48000,
+          "ile": 5.690916571112214,
+          "n_pos": 6,
+          "n_grid": 8,
+          "coverage": 0.75,
+          "appendix": {
+            "1e-06": 6.450055138130776,
+            "1e-08": 7.601347684627799
+          }
+        },
+        {
+          "seed": 4,
+          "B": 48000,
+          "ile": 2.1913988900173194,
+          "n_pos": 5,
+          "n_grid": 8,
+          "coverage": 0.625,
+          "appendix": {
+            "1e-06": 3.3301067405451614,
+            "1e-08": 5.057045560290697
+          }
+        },
+        {
+          "seed": 5,
+          "B": 48000,
+          "ile": 5.7444100829598375,
+          "n_pos": 6,
+          "n_grid": 8,
+          "coverage": 0.75,
+          "appendix": {
+            "1e-06": 6.5035486499783985,
+            "1e-08": 7.654841196475422
+          }
+        },
+        {
+          "seed": 6,
+          "B": 48000,
+          "ile": 11.535041502558657,
+          "n_pos": 7,
+          "n_grid": 8,
+          "coverage": 0.875,
+          "appendix": {
+            "1e-06": 11.91461078606794,
+            "1e-08": 12.49025705931645
+          }
+        },
+        {
+          "seed": 7,
+          "B": 48000,
+          "ile": 0.9424853518444775,
+          "n_pos": 5,
+          "n_grid": 8,
+          "coverage": 0.625,
+          "appendix": {
+            "1e-06": 2.0811932023723196,
+            "1e-08": 3.8081320221178547
+          }
+        },
+        {
+          "seed": 8,
+          "B": 48000,
+          "ile": 2.768757349926715,
+          "n_pos": 5,
+          "n_grid": 8,
+          "coverage": 0.625,
+          "appendix": {
+            "1e-06": 3.907465200454557,
+            "1e-08": 5.634404020200092
+          }
+        },
+        {
+          "seed": 9,
+          "B": 48000,
+          "ile": 2.4192850301019497,
+          "n_pos": 5,
+          "n_grid": 8,
+          "coverage": 0.625,
+          "appendix": {
+            "1e-06": 3.557992880629792,
+            "1e-08": 5.284931700375327
+          }
+        },
+        {
+          "seed": 10,
+          "B": 48000,
+          "ile": 2.6346371118614793,
+          "n_pos": 5,
+          "n_grid": 8,
+          "coverage": 0.625,
+          "appendix": {
+            "1e-06": 3.773344962389322,
+            "1e-08": 5.500283782134857
+          }
+        }
+      ]
+    },
+    "arm_c_ams": {
+      "cell": "all",
+      "arm": "arm_c_ams",
+      "B_actual_field": "n_evals_all_configs",
+      "B_actual_rationale": "all six oracle configurations are charged; the cost varies by seed with the number of AMS levels",
+      "B_actual_median": 115018.0,
+      "B_actual_min": 101024,
+      "B_actual_max": 125936,
+      "B_actual_per_seed": [
+        113456,
+        125936,
+        101024,
+        110380,
+        113456,
+        125920,
+        122844,
+        119672,
+        116580,
+        107272
+      ],
+      "B_actual_constant_across_seeds": false,
+      "floor_primary_median": 8.694291328313829e-06,
+      "n_seeds": 10,
+      "ile_primary_median": 0.464595477677983,
+      "ile_primary_per_seed": [
+        0.4668158409640485,
+        0.44007698373242543,
+        1.0159415725495857,
+        0.6379388993705282,
+        0.41660183265418815,
+        0.4466719237292194,
+        0.2528603766999554,
+        0.4623751143919175,
+        1.121324722914379,
+        0.5871685259446543
+      ],
+      "coverage_median": 0.875,
+      "coverage_min": 0.5,
+      "coverage_max": 1.0,
+      "coverage_per_seed": [
+        1.0,
+        0.75,
+        0.5,
+        1.0,
+        0.75,
+        1.0,
+        1.0,
+        0.75,
+        0.5,
+        1.0
+      ],
+      "n_seeds_zero_coverage": 0,
+      "n_seeds_any_estimate": 10,
+      "n_seeds_full_coverage": 5,
+      "ile_conditional_on_any_estimate_median": 0.464595477677983,
+      "n_grid": 8,
+      "appendix": {
+        "1e-06": {
+          "ile_median": 0.7980056212492321
+        },
+        "1e-08": {
+          "ile_median": 1.373651894497744
+        }
+      },
+      "per_seed": [
+        {
+          "seed": 1,
+          "B": 113456,
+          "ile": 0.4668158409640485,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.4668158409640485,
+            "1e-08": 0.4668158409640485
+          }
+        },
+        {
+          "seed": 2,
+          "B": 125936,
+          "ile": 0.44007698373242543,
+          "n_pos": 6,
+          "n_grid": 8,
+          "coverage": 0.75,
+          "appendix": {
+            "1e-06": 0.9580723431279361,
+            "1e-08": 2.1093648896249597
+          }
+        },
+        {
+          "seed": 3,
+          "B": 101024,
+          "ile": 1.0159415725495857,
+          "n_pos": 4,
+          "n_grid": 8,
+          "coverage": 0.5,
+          "appendix": {
+            "1e-06": 2.1621401558528635,
+            "1e-08": 4.464725248846911
+          }
+        },
+        {
+          "seed": 4,
+          "B": 110380,
+          "ile": 0.6379388993705282,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.6379388993705282,
+            "1e-08": 0.6379388993705282
+          }
+        },
+        {
+          "seed": 5,
+          "B": 113456,
+          "ile": 0.41660183265418815,
+          "n_pos": 6,
+          "n_grid": 8,
+          "coverage": 0.75,
+          "appendix": {
+            "1e-06": 0.9606868782593122,
+            "1e-08": 2.1119794247563357
+          }
+        },
+        {
+          "seed": 6,
+          "B": 125920,
+          "ile": 0.4466719237292194,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.4466719237292194,
+            "1e-08": 0.4466719237292194
+          }
+        },
+        {
+          "seed": 7,
+          "B": 122844,
+          "ile": 0.2528603766999554,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.2528603766999554,
+            "1e-08": 0.2528603766999554
+          }
+        },
+        {
+          "seed": 8,
+          "B": 119672,
+          "ile": 0.4623751143919175,
+          "n_pos": 6,
+          "n_grid": 8,
+          "coverage": 0.75,
+          "appendix": {
+            "1e-06": 0.9931252673694115,
+            "1e-08": 2.144417813866435
+          }
+        },
+        {
+          "seed": 9,
+          "B": 116580,
+          "ile": 1.121324722914379,
+          "n_pos": 4,
+          "n_grid": 8,
+          "coverage": 0.5,
+          "appendix": {
+            "1e-06": 2.1959134960967455,
+            "1e-08": 4.498498589090793
+          }
+        },
+        {
+          "seed": 10,
+          "B": 107272,
+          "ile": 0.5871685259446543,
+          "n_pos": 8,
+          "n_grid": 8,
+          "coverage": 1.0,
+          "appendix": {
+            "1e-06": 0.5871685259446543,
+            "1e-08": 0.5871685259446543
+          }
+        }
+      ]
+    }
+  }
+}

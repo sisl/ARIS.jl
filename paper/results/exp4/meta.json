@@ -1,0 +1,26 @@
+{
+  "experiment_group": "exp4_idm",
+  "timestamp_start": "2026-08-25T21:03:20.657",
+  "julia_version": "1.12.6",
+  "nthreads": 1,
+  "blas_threads": 1,
+  "pkg_versions": {
+    "ForwardDiff": "1.4.1",
+    "AdversarialDriving": "0.1.0",
+    "Distributions": "0.25.129",
+    "Optim": "2.2.1",
+    "Arpack": "0.5.4",
+    "POMDPTools": "0.1.6",
+    "StructuredGaussianMixtures": "0.1.0",
+    "JSON": "0.21.4",
+    "StatsBase": "0.33.21",
+    "AutomotiveSimulator": "0.1.2",
+    "Clustering": "0.15.8",
+    "GaussianMixtures": "0.3.14",
+    "QuadGK": "2.11.3",
+    "ExpectationMaximization": "0.2.4",
+    "POMDPs": "0.9.6",
+    "Crux": "0.1.4"
+  },
+  "environment": "paper/envs/idm/Project.toml"
+}

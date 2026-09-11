@@ -1,0 +1,58 @@
+{
+  "adaptive_quantile": 0.2,
+  "arm_b_protocol": "K runs at B/K; oracle-selects best N in {100,250,500} by ground truth (all 3 counted in budget)",
+  "arm_c_protocol": "ams_curve oracle-selected over p0 in {0.1,0.2,0.3} x nmcmc in {5,10} by median relative error; evaluations include MCMC moves",
+  "arms": [
+    "a_amortized",
+    "b_perthreshold_oracle",
+    "c_ams_oracle"
+  ],
+  "batch_size_amortized": 1000,
+  "cells": [
+    {
+      "budget": 25000,
+      "d": 2
+    },
+    {
+      "budget": 50000,
+      "d": 2
+    },
+    {
+      "budget": 25000,
+      "d": 20
+    },
+    {
+      "budget": 50000,
+      "d": 20
+    }
+  ],
+  "defensive_eta": 0.0,
+  "discovery_policy": "discovery recorded separately from accuracy; every ILE carries n_grid_used and an explicit mask",
+  "experiment": "exp2_shell",
+  "grid_construction": "PGRID = logspace(1e-3, 1e-6, 16); TVEC = sqrt(quantile(Chisq(d),1-p)); r_crit = max(TVEC)+0.5; grid = r_crit - TVEC",
+  "ile_formula": "ILE = mean_{γ ∈ used} |log est(γ) − log truth(γ)|; used = {γ : est(γ) !== nothing && est(γ) > 0 && truth(γ) > 0}",
+  "max_weight_fit": 10.0,
+  "measured_quantity": "curve accuracy AND (separately) discovery behaviour on an isotropic failure set",
+  "n_grid_points": 16,
+  "n_mixture_components": 2,
+  "n_seeds": 10,
+  "problem": "radial_shell",
+  "problem_def": "rho = r_crit - ||x||, x ~ N(0,I_d)",
+  "proposal_family": "JointModel(Normal(), ConditionalEMGMM(k=2))",
+  "quadrature_nodes": 1000,
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "sigma_smoothing": 0.0,
+  "target_threshold": 0.0,
+  "truth": "P(rho<=g) = ccdf(Chisq(d), (r_crit-g)^2) (closed form)"
+}

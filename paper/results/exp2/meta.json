@@ -1,0 +1,18 @@
+{
+  "experiment_group": "exp2_shell",
+  "timestamp_start": "2026-08-25T18:23:49.342",
+  "julia_version": "1.12.6",
+  "nthreads": 1,
+  "blas_threads": 1,
+  "pkg_versions": {
+    "Clustering": "0.15.8",
+    "Distributions": "0.25.117",
+    "ExpectationMaximization": "0.2.3",
+    "ForwardDiff": "1.4.1",
+    "JSON": "1.6.1",
+    "Optim": "2.2.1",
+    "QuadGK": "2.11.3",
+    "StatsBase": "0.34.12"
+  },
+  "environment": "Project.toml"
+}

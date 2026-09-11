@@ -1,0 +1,10 @@
+{
+  "blas_threads": 1,
+  "environment": "Project.toml",
+  "julia_version": "1.12.6",
+  "nthreads": 1,
+  "pkg_versions": {
+    "Distributions": "0.25.117",
+    "JSON": "1.6.1"
+  }
+}

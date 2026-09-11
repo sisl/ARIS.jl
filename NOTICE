@@ -1,0 +1,86 @@
+NOTICE
+======
+
+This repository contains the ARIS.jl package together with the code,
+configurations, and result artifacts used to reproduce the reported tables,
+figures, and diagnostics.
+
+
+1. ConditionalGenerativeValidation.jl
+-------------------------------------
+
+The core library in `src/` and the problem definitions in
+`examples/problems/` derive from ConditionalGenerativeValidation.jl by
+Harrison Delecki:
+
+https://github.com/hdelecki/ConditionalGenerativeValidation.jl
+
+That project provides the conditional generative validation framework on which
+this work builds. This repository retains its package UUID
+`0b8de057-cb0d-4b1a-91d7-07cc9cdc0c12` under the module name `ARIS`.
+
+The original project is MIT licensed, Copyright (c) 2025 hdelecki
+<hdelecki@stanford.edu> and contributors. Its license is reproduced in the
+root `LICENSE` file and governs the derived material.
+
+
+2. Derivative work
+------------------
+
+Material added for this paper includes the experiment drivers under
+`paper/experiments/`, baselines, metric definitions, analysis scripts under
+`paper/scripts/`, figure generators under `paper/figures/`, and result
+artifacts under `paper/results/`.
+
+Copyright (c) 2026 Lea M. Hadzic.
+
+This material is released under the same MIT license.
+
+
+3. StructuredGaussianMixtures.jl (Exp4 dependency)
+--------------------------------------------------
+
+Experiment 4 uses sisl/StructuredGaussianMixtures.jl:
+
+https://github.com/sisl/StructuredGaussianMixtures.jl
+
+The upstream project is MIT licensed, Copyright (c) 2025 Arec Jamgochian
+<arec.jamgochian@terraai.earth> and contributors. It is not redistributed in
+this repository. `paper/envs/idm` fetches it as a Git dependency from the fork
+
+https://github.com/lea-m-hadzic/StructuredGaussianMixtures.jl
+
+pinned to
+
+  commit  `182b322e8f58b54c28c8bebf60466c047839c6af`
+          (also reachable as branch `aris-exp4-b15` and tag `aris-jmlr-exp4`)
+  tree    `00e19319a721e9c900648e69faf41199b2b85541`
+
+This commit is upstream commit `aef6158313edccd91082039086aaa5b3b1674f8c`
+plus one local commit, modifying:
+
+  `src/fit.jl`
+      Adds numerical floors to the diagonal variance in the FactorEM inner
+      M-step:
+      `Dinv = 1 ./ max.(D, 1e-8)`
+      `D .= max.(D, 1e-4)`
+
+  `src/predict.jl`
+      Adds a numerical floor to the input-block diagonal variance in the LRD
+      conditional prediction path:
+      `1 ./ sqrt.(max.(D₁, 1e-8))`
+
+Experiment 4 depends on these numerical-stability changes for its
+150-dimensional MAP-EM fit. `paper/envs/idm/Manifest.toml` pins the fork by
+URL, exact commit (`repo-rev`), and Git tree hash (`git-tree-sha1`), so this
+commit is used instead of the registry version and Pkg verifies the fetched
+source.
+
+The package `Project.toml` at this commit retains the upstream version string
+`0.1.0`, although its contents differ from the registered v0.1.0. The
+`StructuredGaussianMixtures` version `0.1.0` recorded in
+`paper/results/exp4/meta.json` refers to this commit.
+
+Earlier revisions of this repository vendored the same source under
+`third_party/StructuredGaussianMixtures/`. That copy was used to produce the
+Exp4 results; its code files are identical to the pinned commit.
