@@ -1,4 +1,11 @@
-# ARIS.jl
+<h1>
+  <img src="docs/assets/aris-icon.svg"
+       width="56"
+       height="56"
+       align="absmiddle"
+       alt="ARIS.jl icon">
+  ARIS.jl
+</h1>
 
 [![CI](https://github.com/sisl/ARIS.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/sisl/ARIS.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![codecov](https://codecov.io/gh/sisl/ARIS.jl/graph/badge.svg)](https://codecov.io/gh/sisl/ARIS.jl)
