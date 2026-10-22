@@ -1,7 +1,7 @@
 <h1>
   <img src="docs/assets/aris-icon.svg"
-       width="56"
-       height="56"
+       width="50"
+       height="50"
        align="absmiddle"
        alt="ARIS.jl icon">
   ARIS.jl
