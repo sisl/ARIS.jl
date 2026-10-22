@@ -11,7 +11,7 @@ system inputs and robustness values, ARIS constructs threshold-specific
 proposals by truncating the learned robustness distribution.
 
 Full documentation: **<https://sisl.github.io/ARIS.jl/>** — concepts, guides, API
-reference, and reproduction instructions. The source is in [`docs/`](docs/).
+reference, and reproduction instructions.
 
 ## Installation
 
