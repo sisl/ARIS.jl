@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="2.58 1.74 92 92" role="img" aria-label="ARIS.jl">
+  <title>ARIS.jl</title>
+  <defs>
+    <!-- Three tapered ribbons sharing one left edge; rotation about the baseline fans them into
+         the layered A. The bottoms run past the baseline and are clipped flat against it. -->
+    <path id="aris-rib-long" d="M 8.2 98 C 8.3 94 8.4 90 8.5 86
+      C 10 58 24 28 44 10.5 C 52 18 56 32 61.6 43.3 L 54.4 48.7
+      C 50 33 47 25 44 21.5 C 37 31 25 58 23.5 86 C 23.4 90 23.3 94 23.2 98 Z"/>
+    <path id="aris-rib-mid" d="M 8.2 98 C 8.3 94 8.4 90 8.5 86
+      C 10 58 24 28 44 10.5 C 50 17 53.5 26 57 35.5 L 50.2 39.8
+      C 48 31 46 24.5 44 21.5 C 37 31 25 58 23.5 86 C 23.4 90 23.3 94 23.2 98 Z"/>
+    <path id="aris-rib-short" d="M 8.2 98 C 8.3 94 8.4 90 8.5 86
+      C 10 58 24 28 44 10.5 C 49 16 51.5 23 54 29.5 L 47.3 33.5
+      C 46 27 45 23.5 44 21.5 C 37 31 25 58 23.5 86 C 23.4 90 23.3 94 23.2 98 Z"/>
+    <clipPath id="aris-baseline"><rect x="0" y="0" width="96" height="86"/></clipPath>
+    <linearGradient id="aris-sweep" gradientUnits="userSpaceOnUse" x1="16" y1="86" x2="78" y2="70">
+      <stop offset="0" stop-color="#A79AE4"/>
+      <stop offset="0.75" stop-color="#A79AE4"/>
+      <stop offset="1" stop-color="#F0787F"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#aris-baseline)">
+    <use href="#aris-rib-short" fill="#A79AE4" transform="rotate(15 16 86)"/>
+    <use href="#aris-rib-mid" fill="#6254B8" transform="rotate(7.5 16 86)"/>
+    <path fill="url(#aris-sweep)" d="M 13.5 86 C 19.5 65 34 52 49 52
+      C 61 52 70 60.5 77 69.5 L 72.8 74.3 C 66.5 66.5 59.5 57.5 49 57.5
+      C 37 57.5 26 68.5 19.8 86.5 Z"/>
+    <use href="#aris-rib-long" fill="#25235E"/>
+  </g>
+  <circle cx="82.5" cy="77" r="6.5" fill="#F0787F"/>
+</svg>

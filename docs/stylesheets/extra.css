@@ -1,0 +1,228 @@
+/* Project palette (documentation site only). Indigo and violet carry navigation, links and
+   interactive state; coral is reserved for small accents and rare-event highlights. The tokens
+   are mapped onto the theme's own variables; dark mode has its own values. */
+:root,
+[data-md-color-scheme="default"] {
+  --aris-primary: #6254b8;          /* 6.0:1 on white */
+  --aris-primary-dark: #4f42a0;     /* hover: darker on a light background */
+  --aris-primary-light: #f3f0fc;    /* pale lavender tint */
+  --aris-on-primary: #ffffff;
+  --aris-ink: #1b1a33;
+  --aris-text: #2e2c47;
+  --aris-muted: #6b688a;
+  --aris-border: #e4e0f0;
+  --aris-bg: #fbfafe;
+  --aris-bg-translucent: rgba(251, 250, 254, 0.7);
+  --aris-surface: #ffffff;
+  --aris-surface-alt: #f4f3f8;
+  --aris-accent: #f0787f;           /* coral: decorative only, never text */
+  --aris-accent-text: #c73c44;      /* 5.1:1 on white, for coral-coloured text */
+  --aris-accent-tint: rgba(240, 120, 127, 0.1);
+}
+
+[data-md-color-scheme="slate"] {
+  --aris-primary: #a79ae4;          /* 7.5:1 on the dark background */
+  --aris-primary-dark: #c3b9f0;     /* hover: lighter on a dark background */
+  --aris-primary-light: rgba(167, 154, 228, 0.14);
+  --aris-on-primary: #14121f;
+  --aris-ink: #f2f0fa;
+  --aris-text: #ddd9ee;
+  --aris-muted: #a09bbb;
+  --aris-border: rgba(255, 255, 255, 0.1);
+  --aris-bg: #14121f;
+  --aris-bg-translucent: rgba(20, 18, 31, 0.7);
+  --aris-surface: #1b1930;
+  --aris-surface-alt: #232038;
+  --aris-accent: #f0787f;
+  --aris-accent-text: #f0787f;      /* 6.9:1 on the dark background */
+  --aris-accent-tint: rgba(240, 120, 127, 0.12);
+}
+
+/* The extra attribute outranks the theme's palette rules (e.g. its slate link colour). */
+[data-md-color-scheme="default"][data-md-color-primary],
+[data-md-color-scheme="slate"][data-md-color-primary] {
+  --md-primary-fg-color: var(--aris-primary);
+  --md-primary-fg-color--dark: var(--aris-primary-dark);
+  --md-primary-bg-color: var(--aris-on-primary);
+  --md-accent-fg-color: var(--aris-primary);
+  --md-accent-fg-color--transparent: var(--aris-primary-light);
+  --md-typeset-a-color: var(--aris-primary);
+  --md-default-fg-color: var(--aris-ink);
+  --md-default-fg-color--light: var(--aris-muted);
+  --md-typeset-color: var(--aris-text);
+  --md-default-bg-color: var(--aris-bg);
+  --md-default-bg-color--light: var(--aris-bg-translucent);
+  --md-code-bg-color: var(--aris-surface-alt);
+  --md-code-fg-color: var(--aris-ink);
+  --md-typeset-table-color: var(--aris-border);
+}
+
+.md-typeset a:is(:hover, :focus) {
+  color: var(--aris-primary-dark);
+}
+
+/* Header logo: the mark's deep indigo goes murky on the dark header, so the slate scheme swaps
+   in the variant whose ribbons are lifted one step. */
+[data-md-color-scheme="slate"] .md-header__button.md-logo :is(img, svg) {
+  content: url("../assets/aris-mark-dark.svg");
+}
+
+/* Buttons: violet primary; secondary is a neutral surface with a hairline edge. */
+.md-typeset .md-button {
+  color: var(--aris-ink);
+  background-color: var(--aris-surface);
+  box-shadow: inset 0 0 0 0.05rem var(--aris-border);
+}
+.md-typeset .md-button:is(:hover, :focus) {
+  color: var(--aris-ink);
+  background-color: var(--aris-primary-light);
+  opacity: 1;
+}
+.md-typeset .md-button--primary {
+  color: var(--aris-on-primary);
+  background-color: var(--aris-primary);
+  box-shadow: none;
+}
+.md-typeset .md-button--primary:is(:hover, :focus) {
+  color: var(--aris-on-primary);
+  background-color: var(--aris-primary-dark);
+}
+
+/* Cards and tables: neutral surfaces with the project border. */
+.md-typeset .grid.cards > ul > li {
+  background-color: var(--aris-surface);
+  border-color: var(--aris-border);
+}
+.md-typeset table:not([class]) {
+  background-color: var(--aris-surface);
+}
+
+/* Callouts: info and abstract in pale lavender; notes neutral; warning keeps its meaning with
+   the coral accent, which appears nowhere else as a block colour. */
+.md-typeset :is(.admonition, details):is(.abstract, .info) {
+  background-color: var(--aris-primary-light);
+}
+.md-typeset :is(.abstract, .info) > :is(.admonition-title, summary)::before {
+  background-color: var(--aris-primary);
+}
+.md-typeset :is(.abstract, .info) > summary::after {
+  color: var(--aris-primary);
+}
+.md-typeset :is(.admonition, details).note {
+  background-color: var(--aris-surface-alt);
+}
+.md-typeset .note > :is(.admonition-title, summary)::before {
+  background-color: var(--aris-muted);
+}
+.md-typeset .note > summary::after {
+  color: var(--aris-muted);
+}
+.md-typeset :is(.admonition, details).warning {
+  background-color: var(--aris-accent-tint);
+}
+.md-typeset .warning > :is(.admonition-title, summary)::before {
+  background-color: var(--aris-accent-text);
+}
+.md-typeset .warning > summary::after {
+  color: var(--aris-accent-text);
+}
+
+/* Display equations. The notation is Unicode, as it is in the Julia sources, so the pages need
+   no maths renderer and no third-party request; this only centres and spaces the line. */
+.md-typeset .aris-math {
+  margin: 1.1em 0;
+  padding: 0.75em 1em;
+  overflow-x: auto;
+  border-left: 2px solid var(--aris-primary);
+  background-color: var(--aris-surface-alt);
+  color: var(--aris-ink);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  white-space: nowrap;
+}
+.md-typeset .aris-math .aris-where {
+  display: block;
+  margin-top: 0.5em;
+  color: var(--aris-muted);
+  font-size: 0.92em;
+  white-space: normal;
+}
+
+/* Keep identifiers in table cells whole: wide tables scroll instead of breaking `n_samples`. */
+.md-typeset table:not([class]) td code {
+  white-space: nowrap;
+  word-break: normal;
+}
+
+/* Section separation: a hairline above each h2 in page content, in the theme's lightest text
+   colour (follows light and dark mode), with a little space above and below it. */
+.md-typeset h2 {
+  margin-top: 1.8em;
+  padding-top: 0.45em;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Desktop proportions: a wider article and a narrower "On this page" column. The left navigation
+   keeps its width and the layout stays centred; below 60em the theme's own layout applies. */
+.md-grid {
+  max-width: 62.5rem;
+}
+@media screen and (min-width: 60em) {
+  .md-sidebar--secondary {
+    width: 10rem;
+  }
+}
+
+/* "On this page" lists API entries whose headings are long code identifiers
+   (`ConditionalValidation`), which the theme would otherwise break mid-word. Set them a little
+   smaller and let them hyphenate at the edge instead. */
+.md-sidebar--secondary .md-nav__link code {
+  padding: 0;
+  background: none;
+  font-size: 0.85em;
+  overflow-wrap: anywhere;
+}
+
+/* Header wordmark (site name beside the logo) in regular weight. */
+.md-header__topic:first-child {
+  font-weight: 400;
+}
+
+/* Homepage headline: regular weight, slightly larger than the theme's h1 (1.875em). */
+.md-typeset h1.aris-home-title {
+  font-size: 2.125em;
+  font-weight: 400;
+}
+
+/* Homepage resource links (GitHub, paper): compact outlined buttons with the theme's brand
+   icons, lighter than the Quickstart / Installation buttons; they wrap on narrow screens. */
+.md-typeset .aris-resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.md-typeset .aris-resources .md-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+  padding: 0.25em 0.8em;
+  border-radius: 0.3rem;
+  background-color: transparent;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+.md-typeset .aris-resources .md-button:is(:hover, :focus) {
+  background-color: var(--aris-primary-light);
+}
+.md-typeset .aris-resources .md-button:focus-visible {
+  outline: 0.1rem solid var(--aris-primary);
+  outline-offset: 0.1rem;
+}
+.md-typeset .aris-resources .twemoji {
+  height: 1.1em;
+}
+.md-typeset .aris-resources .twemoji svg {
+  width: 1.1em;
+  max-height: none;
+}

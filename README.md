@@ -4,11 +4,15 @@
 [![codecov](https://codecov.io/gh/sisl/ARIS.jl/graph/badge.svg)](https://codecov.io/gh/sisl/ARIS.jl)
 [![Julia](https://img.shields.io/badge/Julia-1.12-9558B2?logo=julia&logoColor=white)](https://julialang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Docs](https://img.shields.io/badge/docs-sisl.github.io%2FARIS.jl-6254B8.svg)](https://sisl.github.io/ARIS.jl/)
 
 **Amortized Rare-Event Importance Sampling (ARIS)** learns a shared proposal
 model that can be reused across multiple failure thresholds. By jointly modeling
 system inputs and robustness values, ARIS constructs threshold-specific
 proposals by truncating the learned robustness distribution.
+
+Full documentation: **<https://sisl.github.io/ARIS.jl/>** — concepts, guides, API
+reference, and reproduction instructions. The source is in [`docs/`](docs/).
 
 ## Installation
 

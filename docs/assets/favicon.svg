@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3.67 8.29 80 80" role="img" aria-label="ARIS.jl">
+  <title>ARIS.jl</title>
+  <!-- Favicon: the mark reduced to two ribbons and the coral dot, which is all that survives
+       at 16 px. The sweep and the middle ribbon are dropped; the dot moves in to meet the tails. -->
+  <defs>
+    <path id="fav-rib-long" d="M 8.2 98 C 8.3 94 8.4 90 8.5 86
+      C 10 58 24 28 44 10.5 C 52 18 56 32 61.6 43.3 L 54.4 48.7
+      C 50 33 47 25 44 21.5 C 37 31 25 58 23.5 86 C 23.4 90 23.3 94 23.2 98 Z"/>
+    <path id="fav-rib-short" d="M 8.2 98 C 8.3 94 8.4 90 8.5 86
+      C 10 58 24 28 44 10.5 C 49 16 51.5 23 54 29.5 L 47.3 33.5
+      C 46 27 45 23.5 44 21.5 C 37 31 25 58 23.5 86 C 23.4 90 23.3 94 23.2 98 Z"/>
+    <clipPath id="fav-baseline"><rect x="0" y="0" width="96" height="86"/></clipPath>
+  </defs>
+  <g clip-path="url(#fav-baseline)">
+    <use href="#fav-rib-short" fill="#A79AE4" transform="rotate(15 16 86)"/>
+    <use href="#fav-rib-long" fill="#25235E"/>
+  </g>
+  <circle cx="70" cy="56" r="9" fill="#F0787F"/>
+</svg>

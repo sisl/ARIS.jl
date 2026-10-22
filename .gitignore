@@ -7,3 +7,6 @@ paper/manuscript/*.bbl
 paper/manuscript/*.blg
 paper/manuscript/*.out
 paper/manuscript/*.synctex.gz
+
+# Zensical documentation build output
+site/
