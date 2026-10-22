@@ -1,10 +1,9 @@
 <h1>
-  <img src="docs/assets/aris-icon.svg"
-       width="50"
-       height="50"
+  <img src="docs/assets/aris-logo.svg"
+       width="250"
+       height="150"
        align="absmiddle"
        alt="ARIS.jl icon">
-  ARIS.jl
 </h1>
 
 [![CI](https://github.com/sisl/ARIS.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/sisl/ARIS.jl/actions/workflows/CI.yml?query=branch%3Amain)
