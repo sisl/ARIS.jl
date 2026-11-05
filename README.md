@@ -140,15 +140,6 @@ The crosswalk example uses the additional environment described in
 julia --project=. -e 'using Pkg; Pkg.test()'
 ```
 
-## Reproducing the Paper
-
-Paper-specific experiment drivers, configurations, seed-level results, metric
-and diagnostic scripts, figure generators, and figures live under
-[`paper/`](paper/).
-
-See [`paper/README.md`](paper/README.md) for reproduction instructions,
-protocol notes, result files, and the raw-state policy.
-
 ## Citation
 
 Paper citation will be added upon publication.
