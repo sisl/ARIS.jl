@@ -17,7 +17,7 @@ model that can be reused across multiple failure thresholds. By jointly modeling
 system inputs and robustness values, ARIS constructs threshold-specific
 proposals by truncating the learned robustness distribution.
 
-Full documentation: **<https://sisl.github.io/ARIS.jl/>** — concepts, guides, API
+Full documentation: <https://sisl.github.io/ARIS.jl/> — concepts, guides, API
 reference, and reproduction instructions.
 
 ## Installation
