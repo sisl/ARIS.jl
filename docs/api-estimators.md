@@ -29,15 +29,15 @@ It reads only `buffer[:w]` and `buffer[:ρ]`, so it works on any buffer that kep
   [one run answer many thresholds](multiple-thresholds.md).
 
 !!! warning "Unbiasedness"
-    Proposal-of-origin adaptive importance sampling is unbiased under the conditional-history and
-    support assumptions stated in the paper. No unbiasedness guarantee is established for the
-    pooled adaptive estimator, because later proposals are fitted from earlier samples.
+    Importance sampling with proposal-of-origin weights is unbiased when the proposal covers the
+    failure region: each sample is weighted against the density that actually produced it.
 
-    The paper's multi-threshold curves use a pooled **balance-MIS** estimator implemented under
-    [`paper/`](https://github.com/sisl/ARIS.jl/tree/main/paper), which is **not** part of the
-    package API.
+    Pooling across adaptive batches carries no such guarantee. `train!` fits each proposal from
+    the samples the previous ones produced, so the batches are not independent draws. Treat a
+    pooled estimate as a point estimate with unquantified bias, and report the spread across
+    seeds rather than a single run.
 
-!!! note "Zero is not a small number"
+!!! note "A zero estimate"
     With no samples below the threshold, this returns exactly `0.0`. That is the absence of an
     estimate, not evidence of a tiny probability. Check `count(cv.buffer[:ρ] .<= γ)` before
     reporting ([diagnostics](estimating.md#diagnostics)).
@@ -58,7 +58,7 @@ ess(cv.buffer[:w][hit])
 
 ---
 
-All three baselines below target **ρ ≤ 0** and are the comparisons used in the paper.
+All three baselines below target **ρ ≤ 0**.
 
 ## `CrossEntropyMethod`
 
@@ -72,7 +72,7 @@ The unconditional cross-entropy method: one proposal over inputs, refitted towar
 region. Trained with `train!` and read with `is_estimate`, exactly like
 `ConditionalValidation`.
 
-!!! warning "The model is unconditional"
+!!! warning "Unconditional model required"
     Unlike [`ConditionalValidation`](api-training.md#conditionalvalidation), the model here is a
     distribution over inputs **alone** — not a `JointModel`, and not a conditional model. It must
     support:
@@ -126,13 +126,13 @@ p̂, levels = ams(sys)
 
 Returns the estimate and the particle population at each level.
 
-!!! warning "Per-sample interface, and variable cost"
+!!! warning "Per-sample interface and variable cost"
     `ams` calls the **single-sample** `System.simulate` and `System.evaluate`, so your system must
     define those shapes ([Systems and interfaces](api-systems.md#per-sample-methods)).
 
     Its simulator cost is not fixed: it stops once a level reaches the target, so the number of
-    evaluations varies by seed. Any budget comparison has to charge the realised count — the paper
-    reports a median of roughly 4.6× the amortized method's budget on Experiment 4.
+    evaluations varies by seed. Any budget comparison has to charge the realised count, not a
+    nominal one.
 
 ## `pmc`
 
@@ -171,7 +171,7 @@ over `T` iterations toward the failure region.
 weighting each draw against the mixture of all `N` kernels rather than only its own. `pmc` also
 uses the **per-sample** system interface.
 
-## Choosing a comparison
+## Comparison of methods
 
 | | adapts | thresholds per run | returns |
 |---|---|---|---|
@@ -181,9 +181,8 @@ uses the **per-sample** system interface.
 | `pmc` | mixture of kernels | one (ρ ≤ 0) | fitted state + samples |
 
 A fair comparison charges every method for every simulator evaluation it made, including tuning
-runs. See [Reproducing experiments](reproduce.md#the-metric).
+runs.
 
-## Next
+## See also
 
 - [Estimating failure probabilities](estimating.md): diagnostics and variance.
-- [Paper and method](paper.md): how the baselines are used in the reported results.

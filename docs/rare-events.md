@@ -1,6 +1,6 @@
 # Rare-event estimation
 
-## The problem
+## Problem statement
 
 A system takes an input x drawn from a known distribution p, runs, and either fails or does not.
 We want
@@ -17,9 +17,9 @@ RSE ≈ √( (1 − P) / (N · P) ) ≈ 1 / √(N·P)
 <span class="aris-where">so reaching 10% relative error at P = 10⁻⁶ needs on the order of 10⁸ simulator evaluations.</span>
 </div>
 
-If each evaluation is a physics rollout or a driving simulation, that budget does not exist. Worse,
-below roughly N ≈ 1/P the estimator usually returns **exactly zero**, which is not a small
-estimate — it is no estimate at all, and it carries no error bar.
+If each evaluation is a physics rollout or a driving simulation, that budget is unavailable. Below
+roughly N = 1/P the estimator returns exactly zero in most runs. A zero is not a small estimate: it
+provides no information about P and admits no error bar.
 
 ## The robustness convention
 
@@ -30,9 +30,10 @@ ARIS does not work with a boolean failure flag. A system returns a real-valued *
     by how much. More negative means a deeper failure.
 
 This is the convention in `System.evaluate`, and every estimator in the package targets ρ ≤ 0
-unless given another threshold. Robustness is what makes the whole method possible: a boolean tells
-you nothing until you have already failed, whereas ρ gives a gradient of "how close did that come",
-which is exactly the signal an adaptive method needs in a region where it has seen no failures yet.
+unless given another threshold. A real-valued robustness is required by the adaptive methods in
+this package: a boolean failure flag carries no information until a failure has occurred, whereas ρ
+orders non-failing inputs by their proximity to failure. That ordering is what the adaptive
+schedule uses before any failure has been observed.
 
 A **threshold** γ generalises the failure event to {ρ ≤ γ}, and the quantity of interest becomes
 
@@ -55,21 +56,21 @@ P(γ) = 𝔼<sub>x~q</sub>[ 1{ρ(x) ≤ γ} · p(x)/q(x) ]
 <span class="aris-where">estimated by P̂(γ) = (1/N) Σᵢ 1{ρ(xᵢ) ≤ γ} · wᵢ, with weights wᵢ = p(xᵢ)/q(xᵢ) and xᵢ ~ q.</span>
 </div>
 
-This is unbiased for any q whose support covers the failure region. The variance, however, depends
-entirely on how well q matches the optimal proposal, which is p restricted to the failure
-region and renormalised. That is the thing you cannot sample from — if you could, you would already
-know P(γ).
+The estimator is unbiased for any q whose support covers the failure region. Its variance depends
+on how closely q matches the variance-minimising proposal, which is p restricted to the failure
+region and renormalised. That proposal cannot be sampled from directly, since constructing it
+requires P(γ).
 
-So the practical question is never "should I use importance sampling" but **how do I find a usable
-q**, given that the failure region is exactly the part of the input space I have not yet seen.
+The practical problem is therefore the construction of a usable q in a region of the input space
+from which no samples have yet been drawn.
 
-!!! warning "Support is not optional"
+!!! warning "Support requirement"
     If q assigns zero density anywhere the failure region has mass, the estimator is biased and no
-    amount of sampling fixes it. A proposal that has collapsed onto one failure mode will happily
-    return a confident, wrong answer. [Working with multiple thresholds](multiple-thresholds.md)
-    covers the diagnostics.
+    amount of sampling fixes it. A proposal that has collapsed onto one failure mode returns an
+    underestimate with no indication of error. [Working with multiple
+    thresholds](multiple-thresholds.md) covers the diagnostics.
 
-## Adaptive proposals, and what is left over
+## Adaptive proposals
 
 The standard answer is to build q adaptively: sample, look at what came back, refit q toward the
 failure region, repeat. The cross-entropy method does this, and the package ships it as a baseline

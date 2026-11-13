@@ -8,7 +8,7 @@ through.
 julia --project=. examples/basic_usage.jl
 ```
 
-## The script
+## Script
 
 ```julia
 using ARIS
@@ -55,9 +55,9 @@ truth:        1.822e-06
     Produced with Julia 1.12.6 and the pinned `Manifest.toml`. `Random.seed!(1)` fixes the run for
     a given Julia version and dependency set; other versions or seeds will give different numbers.
     One run of a stochastic estimator is one draw — see
-    [Estimating failure probabilities](estimating.md#variance-and-getting-an-error-bar).
+    [Estimating failure probabilities](estimating.md#variance-and-error-bars).
 
-## Why this problem
+## Choice of test problem
 
 ρ(x) = 3 − min(x₁, x₂) with x ~ 𝒩(0, I₂) is a **unimodal** rare event with an exact answer:
 
@@ -66,13 +66,13 @@ truth:        1.822e-06
 <span class="aris-where">since the two coordinates are independent; at γ = 0 this is Φ(−3)² ≈ 1.822 × 10⁻⁶.</span>
 </div>
 
-At that probability, 25,000 draws from the prior would be expected to produce **0.05** failures.
-Naive Monte Carlo would return zero essentially every time. So the comparison is not "is the
-estimate good" but "is there an estimate at all".
+At that probability, 25,000 draws from the prior are expected to produce 0.05 failures, so naive
+Monte Carlo returns an estimate of zero in almost every run. The quantity of interest here is
+therefore whether any non-zero estimate is produced at all.
 
-## Extending the script
+## Variations
 
-### Read the whole curve
+### Estimating at other thresholds
 
 The run was not specific to γ = 0, so the same buffer answers other thresholds at no extra cost:
 
@@ -86,7 +86,7 @@ end
 See [Working with multiple thresholds](multiple-thresholds.md), including the reach and support
 conditions this glosses over.
 
-### Watch it train
+### Logging each iteration
 
 ```julia
 cv = ConditionalValidation(
@@ -101,7 +101,7 @@ cv = ConditionalValidation(
 train!(cv, sys)
 ```
 
-### Check the diagnostics
+### Diagnostics
 
 ```julia
 reset_fit_stats!()        # before train!
@@ -114,7 +114,7 @@ hit = ρs .<= γ_target
 println(get_fit_stats())
 ```
 
-### Swap in a single Gaussian
+### Single-Gaussian conditional model
 
 ```julia
 model = JointModel(Normal(), ConditionalGaussian(2))
@@ -122,15 +122,15 @@ model = JointModel(Normal(), ConditionalGaussian(2))
 
 Cheaper and more stable, and adequate here because the failure region is a single corner. It is
 the wrong choice on a multimodal problem — see
-[`tailrace.jl`](problems.md#tailracetoy-the-multimodal-tail).
+[`tailrace.jl`](problems.md#tailracetoy).
 
-### Try your own system
+### Using another system
 
 Replace `UnimodalToy` with any `System.SystemParameters` subtype
 ([Defining a system](defining-a-system.md)), and match `xdim`, `sdim`, `depth` and the
 conditional model's feature count to it.
 
-## Next
+## See also
 
 - [Example problems](problems.md): the other three systems that ship with the package.
 - [Training a proposal](training.md): what each option does.

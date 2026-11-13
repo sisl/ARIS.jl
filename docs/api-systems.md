@@ -66,8 +66,8 @@ System.isfailure(s, state)
 
 !!! note
     The `RMDP` and conditional-policy code that consumes these is behind the `CGV_ENABLE_POLICY`
-    gate, disabled by default, and unused by every paper experiment. A sequential problem can be
-    expressed through the batched `simulate`/`evaluate` path instead.
+    gate and is disabled by default. A sequential problem can be expressed through the batched
+    `simulate`/`evaluate` path instead.
 
 ## `Buffer`
 
@@ -156,7 +156,7 @@ marginal(d::MvNormal, dim::Int)          -> Normal
 
 The Gaussian marginal over the given coordinates.
 
-## Next
+## See also
 
 - [Models and distributions](api-models.md): the proposal models.
 - [Training and sampling](api-training.md): `ConditionalValidation`, `train!`, schedules.

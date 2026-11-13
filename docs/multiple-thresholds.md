@@ -1,8 +1,9 @@
 # Working with multiple thresholds
 
-This is what ARIS is for. One trained run, a whole curve.
+A single trained run yields estimates at any number of thresholds. This page covers how to obtain
+them and the conditions under which they are valid.
 
-## The curve
+## Estimating a threshold curve
 
 ```julia
 using Printf
@@ -27,7 +28,7 @@ for γ in 2.0:-0.5:0.0
 end
 ```
 
-## The three things that can go wrong
+## Conditions for validity
 
 A number comes back for **any** γ you ask about. Three separate conditions decide whether it means
 anything, and none of them is checked for you.
@@ -45,11 +46,10 @@ r_reached = minimum(cv.buffer[:r])     # deepest conditioning value actually use
 γ < r_reached && @warn "below the schedule's reach — extrapolating" γ r_reached
 ```
 
-!!! warning "Reach and coverage are different claims"
-    The paper's Experiment 2 reports an estimate at a grid threshold **only** when the adaptive
-    schedule has reached it; its reported coverage therefore measures schedule reach, not whether
-    the estimator would have returned something. If you report a curve, say which points were
-    within reach.
+!!! warning "Reach and availability"
+    `is_estimate` returns a number at any threshold, whether or not the schedule reached it, so
+    "an estimate came back" says nothing about reach. If you report a curve, say which points the
+    schedule actually reached and which are extrapolation.
 
 ### Support
 
@@ -95,33 +95,29 @@ P(γ) is non-increasing in γ, and the estimator respects this by construction: 
 monotone **as a realisation** — which means monotonicity is *not* evidence that the curve is
 correct. A collapsed proposal produces a perfectly monotone, perfectly wrong curve.
 
-## What the package does and does not provide
+## Scope of `is_estimate`
 
 !!! info "Scope"
     The package gives you `is_estimate(buffer; threshold)`, which is the proposal-of-origin
     estimator evaluated at whatever threshold you pass. Everything on this page is built from that
     one call plus the buffer's columns.
 
-    The paper's reported multi-threshold curves use a pooled **balance-MIS** estimator, which
-    re-weights each sample against the mixture of all proposals that were used rather than only its
-    own. That is implemented under
-    [`paper/`](https://github.com/sisl/ARIS.jl/tree/main/paper) and is **not** part of the public
-    API. If you are reproducing the paper's numbers, use the paper's drivers
-    ([Reproducing experiments](reproduce.md)); if you are using the package on your own problem,
-    `is_estimate` is the supported path.
+    Each weight refers only to the proposal that produced that sample, so the pooled average is
+    a proposal-of-origin estimate rather than a multiple-importance-sampling one over the mixture
+    of all proposals. That is a deliberate, documented limit of `is_estimate`, not an
+    approximation it corrects for internally.
 
-## A practical recipe
+## Procedure
 
 1. Set `target` to the deepest threshold you care about.
 2. Train, with a `log_callback` that prints the conditioning value and hit count per iteration
-   ([Training a proposal](training.md#watching-a-run)).
+   ([Training a proposal](training.md#logging-a-run)).
 3. Confirm the schedule reached the target: `minimum(cv.buffer[:r])`.
 4. Run `threshold_report` over your grid and drop, or mark, rows that are beyond reach or have
    negligible ESS.
 5. Repeat over several seeds and report the spread, not a single run
-   ([Estimating failure probabilities](estimating.md#variance-and-getting-an-error-bar)).
+   ([Estimating failure probabilities](estimating.md#variance-and-error-bars)).
 
-## Next
+## See also
 
 - [Estimating failure probabilities](estimating.md): diagnostics in more detail.
-- [Paper and method](paper.md): what the paper measures, and how.

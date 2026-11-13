@@ -1,7 +1,6 @@
 # Welcome to ARIS.jl! { .aris-home-title }
 
 [:simple-github: GitHub Repository](https://github.com/sisl/ARIS.jl){ .md-button aria-label="GitHub repository" }
-[:material-file-document-outline: Paper and Reproducibility](https://github.com/sisl/ARIS.jl/tree/main/paper){ .md-button aria-label="Paper and reproducibility materials" }
 { .aris-resources }
 
 **Amortized Rare-Event Importance Sampling: one proposal, reused across failure thresholds.**
@@ -45,30 +44,30 @@ is_estimate(cv.buffer; threshold = 0.0)
     negative values are deeper failures. Every estimator in the package targets ρ ≤ 0 unless you
     pass another threshold. See [Rare-event estimation](rare-events.md#the-robustness-convention).
 
-## What amortization buys you
+## Amortization across thresholds
 
 <div class="grid cards" markdown>
 
--   **One fit, many thresholds**
+-   **One fit, all thresholds**
 
     ---
 
-    The proposal is a joint model q(x, r) over inputs and robustness. Restricting r ≤ γ turns it
-    into a proposal aimed at the failure region {ρ ≤ γ}, for any γ, with no refitting and no extra
-    simulator calls.
+    The proposal is a joint model q(x, r) over inputs and robustness. Restricting r ≤ γ yields a
+    proposal for the failure region {ρ ≤ γ} at any γ, with no refitting and no further simulator
+    calls.
     See [Amortized importance sampling](amortization.md).
 
--   **An adaptive schedule, not a leap**
+-   **Stepwise threshold schedule**
 
     ---
 
-    Training walks the conditioning threshold down from the prior toward the target, so the
-    proposal is never asked to jump straight into the rare set.
+    Training lowers the conditioning threshold from the prior toward the target in steps, so the
+    proposal is not fitted directly to the rare set.
     See [Methodology](methodology.md).
 
 </div>
 
-## Where to go next
+## Further reading
 
 - [Quickstart](quickstart.md): a complete run, end to end, with the numbers it produces.
 - [Rare-event estimation](rare-events.md): the problem, the robustness convention, and why
@@ -80,12 +79,13 @@ is_estimate(cv.buffer; threshold = 0.0)
 
 ## Scope
 
-!!! warning "Package API versus paper code"
-    This site documents the **package** — what `using ARIS` gives you. The paper's
-    multi-threshold estimator (pooled balance-MIS), its experiment drivers, metrics and figures
-    live under [`paper/`](https://github.com/sisl/ARIS.jl/tree/main/paper) and are not part of the
-    public API. [Paper and method](paper.md) says which is which.
+!!! warning "Definition of `is_estimate`"
+    `is_estimate` is a **proposal-of-origin** importance-sampling estimator: each sample is
+    weighted against the proposal that produced it, and the batches are pooled by a plain
+    average over the whole buffer. It is not a multiple-importance-sampling estimator over the
+    mixture of all proposals used during a run. See
+    [Estimating failure probabilities](estimating.md#unbiasedness).
 
 The package is not registered in Julia's General registry; it is installed from a clone
 ([Installation](install.md)). Optional normalizing-flow and policy/MDP integrations exist behind
-environment-variable gates, are disabled by default, and are not used by any paper experiment.
+environment-variable gates and are disabled by default.

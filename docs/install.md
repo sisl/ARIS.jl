@@ -19,9 +19,9 @@ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
 
 `Pkg.instantiate()` installs the exact versions recorded in `Manifest.toml`. That is the
-environment the paper's results were produced in, and it is what you want for reproduction. To
-work against freshly resolved dependencies instead, delete `Manifest.toml` before instantiating
-— and expect numerical results to move.
+dependency set the package is tested against, and the one to use if you want reproducible
+numbers. To work against freshly resolved dependencies instead, delete `Manifest.toml` before
+instantiating — and expect numerical results to move.
 
 ## Check the install
 
@@ -30,8 +30,7 @@ julia --project=. -e 'using Pkg; Pkg.test()'
 ```
 
 The suite covers the public API surface, the utility functions, the buffer, the conditional
-models, the sampling strategies, the estimator, and the baselines. It does not run the paper
-experiments.
+models, the sampling strategies, the estimator, and the baselines.
 
 A quick end-to-end check, which takes a couple of minutes:
 
@@ -54,7 +53,7 @@ things (plotting, driving environments) that the package itself does not.
 
 ## Optional integrations
 
-Two integrations are gated off by default and are **not** used by any paper experiment:
+Two integrations are gated off by default:
 
 | gate | environment variable | brings in |
 |---|---|---|
@@ -64,14 +63,3 @@ Two integrations are gated off by default and are **not** used by any paper expe
 These are read at module load, so set them before `using ARIS`. Their dependencies are not in
 `Project.toml`; you must provide them in the active environment yourself. Leave both unset unless
 you specifically need them.
-
-## Reproducing the paper
-
-Experiment 4 uses a **separate** environment, because it pulls a pinned Git dependency:
-
-```bash
-julia --project=paper/envs/idm -e 'using Pkg; Pkg.instantiate()'
-```
-
-The figure and metric scripts are Python and need `numpy` and `matplotlib`. See
-[Reproducing experiments](reproduce.md).

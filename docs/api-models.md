@@ -39,7 +39,7 @@ rand(rng, jm, γ::Vector)           -> xs          one draw per entry of γ; ret
 The vector form is what `train!` uses: each sample gets its own r drawn from the truncated
 robustness model, then an input conditioned on it.
 
-!!! warning "Different return shapes"
+!!! warning "Return shapes"
     `rand(rng, jm, γ::Real)` returns the **pair** `(x, r)`; `rand(rng, jm, γ::Vector)` returns an
     `xdim × length(γ)` matrix of inputs only.
 
@@ -119,7 +119,7 @@ log-likelihood. Components whose covariance determinant falls below 10⁻³ are 
 If every restart fails it falls back to the k-means initialisation; if that also fails it returns
 the previous mixture unchanged, making the iteration a no-op rather than raising.
 
-### Fit diagnostics
+## Fit diagnostics
 
 Those fallbacks are **counted, not printed**:
 
@@ -140,9 +140,8 @@ get_fit_stats()             # a Dict{Symbol,Int}
 
 !!! warning
     A non-zero `:kmeans_fallback` or `:degenerate_fit_guard` means some iterations did not get a
-    real fit. The run still completes and still returns an estimate. The paper records three
-    Experiment 3 baseline runs that took this path and reports clean-only sensitivity aggregates
-    alongside the headline numbers.
+    real fit. The run still completes and still returns an estimate, so check these counters
+    before trusting a result rather than after.
 
 ## `ConditionalGaussian`
 
@@ -165,10 +164,10 @@ Cheap and stable, but unimodal. If the robustness values have standard deviation
 fit degenerates gracefully to an unconditional Gaussian over the inputs. A ridge of 10⁻³ I is
 added to the conditional covariance.
 
-!!! warning "Unimodal means unimodal"
+!!! warning "Unimodal model"
     On a problem with genuinely separate failure modes this will collapse onto one of them and
     return a confident underestimate. See
-    [`tailrace.jl`](problems.md#tailracetoy-the-multimodal-tail).
+    [`tailrace.jl`](problems.md#tailracetoy).
 
 ## `GaussianMixture`
 
@@ -199,8 +198,8 @@ fit(jm, xs, rs, weights)      -> TruncatedJointModel
 
 !!! note
     Its integration domain is bounded below at −10 rather than following the `MARGINAL_*`
-    settings, and its density is evaluated per sample. `JointModel` is the path the examples and
-    the paper's reported runs use.
+    settings, and its density is evaluated per sample. `JointModel` is the path the examples
+    use.
 
 ## Marginal density evaluation
 
@@ -262,7 +261,7 @@ log q<sub>θ</sub>(x | r) for every column of `X` at a **single** conditioning v
 conditional distribution once. Model types add methods here; the fallback works for anything
 supporting `logpdf(traj, X, rs)`.
 
-## Next
+## See also
 
 - [Training and sampling](api-training.md): running a model against a system.
 - [Estimators and baselines](api-estimators.md): turning a buffer into a number.

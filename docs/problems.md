@@ -11,17 +11,14 @@ include(joinpath("examples", "problems", "toy.jl"))
 They are kept outside the package so that they can depend on things the package does not, which
 matters for the crosswalk problem in particular.
 
-Each one is also the problem behind one of the paper's experiments
-([Reproducing experiments](reproduce.md)).
+| file | type | xdim | failure modes | closed form |
+|---|---|---:|---|---|
+| `toy.jl` | `UnimodalToy` | 2 | one | yes |
+| `radial_shell.jl` | `RadialShell` | 20 | a shell | yes |
+| `tailrace.jl` | `TailRaceToy` | 2+ | two | no |
+| `crosswalk.jl` | `AdversarialCrosswalk` | 150 | — | no |
 
-| file | type | xdim | failure modes | closed form | experiment |
-|---|---|---:|---|---|---|
-| `toy.jl` | `UnimodalToy` | 2 | one | yes | Exp1 |
-| `radial_shell.jl` | `RadialShell` | 20 | a shell | yes | Exp2 |
-| `tailrace.jl` | `TailRaceToy` | 2+ | two | no | Exp3 |
-| `crosswalk.jl` | `AdversarialCrosswalk` | 150 | — | no | Exp4 |
-
-## `UnimodalToy` — the corner
+## `UnimodalToy`
 
 ```julia
 UnimodalToy(γ)
@@ -32,15 +29,15 @@ UnimodalToy(γ)
 </div>
 
 `xdim = 2`, `sdim = 2`, `depth = 1`. The failure region is the corner where both coordinates are
-large, so it is unimodal and compact. The closed form makes it the right problem for checking that
-a setup works at all, and it is what [Basic usage](basic-usage.md) uses.
+large, and is therefore unimodal and compact. The closed form makes it suitable for verifying a
+configuration; it is used in [Basic usage](basic-usage.md).
 
 ```julia
 sys = UnimodalToy(3.0)
 truth(g) = cdf(Normal(), g - 3.0)^2
 ```
 
-## `RadialShell` — high dimensions
+## `RadialShell`
 
 ```julia
 RadialShell(; r_crit = 7.5, d = 20)
@@ -56,13 +53,12 @@ RadialShell(; r_crit = 7.5, d = 20)
 shell_truth(s::RadialShell, γ) = ccdf(Chisq(s.d), (s.r_crit - γ)^2)
 ```
 
-Failure is everything *outside* a radius, so the failure region is a thin spherical shell — it has
-no preferred direction, and in 20 dimensions it is nowhere near any particular point. This is the
-problem that punishes a proposal for collapsing onto one direction, and it is where the schedule's
-**reach** becomes the limiting factor rather than the model's flexibility. The paper's Experiment 2
-reports estimates only at thresholds the schedule actually got to.
+Failure is everything outside a radius, so the failure region is a thin spherical shell with no
+preferred direction, and in 20 dimensions it is far from any particular point. A proposal that
+collapses onto one direction will underestimate here, and schedule reach rather than model
+flexibility is the limiting factor.
 
-Remember to scale the conditional model with the dimension:
+Scale the conditional model with the dimension:
 
 ```julia
 sys = RadialShell(; r_crit = 7.5, d = 20)
@@ -70,7 +66,7 @@ model = JointModel(Normal(), ConditionalEMGMM(2, 21, 21))   # d + 1, d + 1
 cv = ConditionalValidation(model = model, xdim = 20, sdim = 20, depth = 1, ...)
 ```
 
-## `TailRaceToy` — the multimodal tail
+## `TailRaceToy`
 
 ```julia
 TailRaceToy(; c1 = 5.5, c2 = 23.0, d = 2)
@@ -86,19 +82,18 @@ The point is the **x₂² term**: it is symmetric, so the second failure mode oc
 x₂ ≈ +√c₂ and x₂ ≈ −√c₂. Two mechanisms race to be the binding constraint, and one of them is
 itself two-sided.
 
-!!! warning "This problem exists to break unimodal proposals"
+!!! warning "Unimodal proposals fail on this problem"
     A `ConditionalGaussian`, or a mixture with too few components, will find one mode and report a
-    confident underestimate — with no error and nothing in the diagnostics that obviously says
-    "wrong", because the samples it does find are perfectly valid. Use enough components, and check
-    `get_fit_stats()` for collapse:
+    underestimate. No error is raised, and the diagnostics do not flag it, because the samples it
+    does find are valid. Use enough components and check `get_fit_stats()` for collapse:
 
     ```julia
     model = JointModel(Normal(), ConditionalEMGMM(3, 3, 3))
     ```
 
-There is no closed form here. The paper treats it as a single-threshold study.
+There is no closed form here.
 
-## `AdversarialCrosswalk` — the realistic one
+## `AdversarialCrosswalk`
 
 ```julia
 AdversarialCrosswalk(; dt = 0.2)
@@ -118,25 +113,23 @@ running an intelligent-driver model. Robustness is derived from the point of clo
 !!! warning "Separate environment required"
     This problem needs `AdversarialDriving`, `AutomotiveSimulator`, `AutomotiveVisualization`,
     `POMDPs`, `POMDPTools` and `Crux`, none of which are dependencies of `ARIS`. Use the
-    Experiment 4 environment:
+    separate environment kept in the repository for it:
 
     ```bash
     julia --project=paper/envs/idm -e 'using Pkg; Pkg.instantiate()'
     ```
 
     That environment includes Git-based dependencies and takes a while to instantiate on a fresh
-    machine. See [`paper/README.md`](https://github.com/sisl/ARIS.jl/blob/main/paper/README.md).
+    machine.
 
-This is the problem where the amortization claim is worth something: a 150-dimensional input, a
-simulator in the loop, and a whole threshold grid wanted rather than a single number. The paper
-reports an eight-point grid over ten seeds.
+This problem combines a 150-dimensional input, a simulator in the loop, and a threshold grid
+rather than a single threshold.
 
-## Writing your own
+## Defining additional problems
 
 See [Defining a system](defining-a-system.md). The toy problems are deliberately short — `toy.jl`
 is about 40 lines — and are the best templates to start from.
 
-## Next
+## See also
 
 - [Basic usage](basic-usage.md): the runnable script, walked through.
-- [Reproducing experiments](reproduce.md): how these map onto the paper's results.

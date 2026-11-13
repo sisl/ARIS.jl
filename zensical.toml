@@ -37,11 +37,6 @@ nav = [
     { "Training and sampling" = "api-training.md" },
     { "Estimators and baselines" = "api-estimators.md" },
   ] },
-  { "Research" = [
-    { "Paper and method" = "paper.md" },
-    { "Reproducing experiments" = "reproduce.md" },
-    { "Citation" = "citation.md" },
-  ] },
 ]
 
 [project.theme]

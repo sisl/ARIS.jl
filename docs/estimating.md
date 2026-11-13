@@ -7,14 +7,14 @@ train!(cv, sys)
 p̂ = is_estimate(cv.buffer; threshold = 0.0)
 ```
 
-## What the estimate is
+## Definition
 
 <div class="aris-math" markdown="0">
 P̂(γ) = (1/N<sub>total</sub>) Σ<sub>i</sub> 1{ρ<sub>i</sub> ≤ γ} · w<sub>i</sub>
 <span class="aris-where">over every sample in the buffer, including the first prior batch; w<sub>i</sub> is the raw proposal-of-origin weight recorded at sampling time.</span>
 </div>
 
-Three consequences worth being explicit about:
+Three consequences follow:
 
 - **It is not self-normalised.** The denominator is the sample count, not Σw. Each weight already
   refers to the proposal that produced it.
@@ -24,7 +24,7 @@ Three consequences worth being explicit about:
   `threshold` changes only the indicator, which is why one run answers many thresholds
   ([Working with multiple thresholds](multiple-thresholds.md)).
 
-## Reading the buffer
+## Buffer contents
 
 ```julia
 cv.buffer[:x]        # xdim × N   inputs
@@ -38,8 +38,8 @@ length(cv.buffer)    # number of samples stored
 
 ## Diagnostics
 
-**Always look at these before quoting an estimate.** A rare-event estimator's failure mode is a
-plausible-looking wrong number, not an error.
+Check these before reporting an estimate. A rare-event estimator typically fails by returning an
+incorrect value rather than by raising an error.
 
 ```julia
 using Statistics
@@ -63,20 +63,20 @@ println("deepest ρ    ", minimum(ρs))
 | **ESS over hits is small** (single digits) | a handful of samples carry the estimate. The number is a draw from a high-variance estimator; do not quote it alone |
 | **max weight share near 1** | one sample *is* the estimate |
 | **schedule stopped above γ** | the proposal was never aimed at this region. See [reach](multiple-thresholds.md#reach) |
-| **EM fell back** (`get_fit_stats()`) | the conditional model may not represent the failure region. See [fit diagnostics](api-models.md#fit-diagnostics) |
+| **EM fell back** (`get_fit_stats()`) | the conditional model is not reliably fitted. See [fit diagnostics](api-models.md#fit-diagnostics) |
 
-!!! warning "Effective sample size at the target is the number to watch"
+!!! warning "Effective sample size at the target"
     Overall ESS can look healthy while the samples that actually land in the failure region are
-    dominated by one or two weights. For reference, the paper's Experiment 4 reports a median
-    target ESS of 5.8 across ten seeds at the target threshold — small, and reported as such.
+    dominated by one or two weights. On a hard problem the target ESS can be in the single
+    digits even when the overall figure looks fine, so check it explicitly and report it.
 
-## Variance, and getting an error bar
+## Variance and error bars
 
 A single run gives a single draw. The package does not return a confidence interval, and one
 should not be inferred from a single trained buffer: the samples are neither independent nor
 identically weighted, so the usual weighted-variance formula understates the true spread.
 
-The honest approach, and the one the paper uses, is **repeated independent runs**:
+The honest approach is **repeated independent runs**:
 
 ```julia
 using Statistics
@@ -98,23 +98,22 @@ p̂s = replicate(sys)
 println("median ", median(p̂s), "   spread ", extrema(p̂s))
 ```
 
-Report the spread across seeds. Because these estimates range over orders of magnitude, summarise
-them on a log scale — the paper's metric is mean absolute log error against a known truth, with
-zero or non-finite estimates floored at 1/B for a charged budget B
-([Reproducing experiments](reproduce.md#the-metric)).
+Report the spread across seeds. Because these estimates range over orders of magnitude,
+summarise them on a log scale: absolute log error against a known truth is the informative
+measure, and a run that returns zero has to be handled explicitly rather than averaged in.
 
 ## Unbiasedness
 
 !!! warning
-    Proposal-of-origin adaptive importance sampling is unbiased **under the conditional-history and
-    support assumptions stated in the paper**. No unbiasedness guarantee is established for the
-    pooled adaptive estimator, because later proposals are fitted using earlier samples, so the
-    batches are not independent.
+    Importance sampling with proposal-of-origin weights is unbiased when the proposal covers the
+    failure region: each sample is weighted against the density that actually produced it.
 
-    The paper's multi-threshold curves use a pooled **balance-MIS** estimator implemented under
-    `paper/`, not exposed by the package. `is_estimate` is the proposal-of-origin estimator.
+    Pooling across adaptive batches carries no such guarantee. `train!` fits each proposal from
+    the samples the previous ones produced, so the batches are not independent draws. Treat a
+    pooled estimate as a point estimate with unquantified bias, and report the spread across
+    seeds rather than a single run.
 
-## Comparing against a baseline
+## Comparison with baselines
 
 All three baselines target ρ ≤ 0 and are described in
 [Estimators and baselines](api-estimators.md).
@@ -137,13 +136,12 @@ p̂_ams, levels = ams(sys)
 μ, Σ, samples = pmc(sys; dₓ = 2)
 ```
 
-!!! note "Charge the budget honestly"
+!!! note "Budget accounting"
     A comparison is only meaningful if every method is charged for every simulator evaluation it
-    made, including the ones spent on tuning. `ams` runs a variable number of levels and stops when
-    it reaches the target, so its cost varies per seed; the paper reports a median of about 4.6×
-    the amortized method's budget on Experiment 4.
+    made, including the ones spent on tuning. `ams` runs a variable number of levels and stops
+    when it reaches the target, so its cost varies per seed and has to be measured, not assumed.
 
-## Next
+## See also
 
 - [Working with multiple thresholds](multiple-thresholds.md): reading a curve, and its caveats.
 - [Estimators and baselines](api-estimators.md): signatures and return shapes.

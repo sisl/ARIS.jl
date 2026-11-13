@@ -50,7 +50,7 @@ components on too little data collapses covariances; the fit guards against this
 near-singular components and counting the event — check `get_fit_stats()` afterwards
 ([diagnostics](api-models.md#fit-diagnostics)).
 
-!!! warning "Multimodality is a modelling decision, not an automatic one"
+!!! warning "Multimodality must be modelled explicitly"
     If failure can occur in genuinely distinct regions of input space, a single Gaussian cannot
     represent it and will collapse onto whichever mode it finds first — returning a confident
     underestimate. The package will not warn you. The bundled `tailrace.jl` problem exists to
@@ -60,7 +60,7 @@ near-singular components and counting the event — check `get_fit_stats()` afte
 
 The schedule decides which conditioning threshold each batch targets.
 
-### `QuantileSampling` — the usual choice
+### `QuantileSampling`
 
 ```julia
 QuantileSampling(0.2; target = 0.0)
@@ -76,7 +76,7 @@ descends geometrically rather than jumping.
 - **`target`** is a floor, not a goal — the schedule stops descending there. Set it to the
   threshold you care about, normally `0.0`.
 
-!!! note "Reach is not guaranteed"
+!!! note "Reach"
     `target` is where the schedule *stops*, not where it is promised to *arrive*. If the budget
     runs out first, the conditioning value never gets there. After training, check:
 
@@ -85,7 +85,7 @@ descends geometrically rather than jumping.
     minimum(cv.buffer[:ρ])     # the deepest robustness actually observed
     ```
 
-### The others
+### Other strategies
 
 | strategy | behaviour |
 |---|---|
@@ -93,7 +93,7 @@ descends geometrically rather than jumping.
 | [`CrossEntropySampling`](api-training.md#crossentropysampling) | draws conditioning values from a distribution refitted to the elite values of a smoothed KL objective |
 | [`GaussianNES`](api-training.md#gaussiannes) | maintains a Gaussian over conditioning values, updated by natural-evolution-strategy gradient steps |
 
-`QuantileSampling` is what the examples and the paper's reported runs use.
+`QuantileSampling` is what the examples use.
 
 ## Choosing the budget
 
@@ -110,7 +110,7 @@ descends geometrically rather than jumping.
 Both too-small failure modes look the same from the outside — a plausible number — so check the
 diagnostics rather than the estimate.
 
-## Other options worth knowing
+## Additional options
 
 | option | default | effect |
 |---|---|---|
@@ -121,7 +121,7 @@ diagnostics rather than the estimate.
 | `log_callback` | no-op | `(cv, D) -> ...`, called each iteration with that iteration's batch |
 | `log` | `nothing` | a [`LoggerParams`](api-training.md#loggerparams) for periodic logging |
 
-### Watching a run
+## Logging a run
 
 ```julia
 cv = ConditionalValidation(
@@ -156,7 +156,7 @@ Without it, the global RNG is used, so `Random.seed!` before the call also works
 reproducible for a fixed Julia version **and** dependency set — the pinned `Manifest.toml` is part
 of the specification, not a convenience.
 
-## Next
+## See also
 
 - [Estimating failure probabilities](estimating.md): what to do with a trained run.
 - [Methodology](methodology.md): what each iteration does internally.

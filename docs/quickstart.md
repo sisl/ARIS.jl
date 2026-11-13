@@ -4,7 +4,7 @@ This page runs one complete estimate: define a system, train an amortized propos
 failure probability off the result. It assumes the environment is instantiated
 ([Installation](install.md)).
 
-## The problem
+## Test problem
 
 The bundled toy system is
 
@@ -14,10 +14,10 @@ The bundled toy system is
 </div>
 
 With γ₀ = 3 and a target threshold of γ = 0, the failure probability is Φ(−3)² ≈ 1.8 × 10⁻⁶.
-Drawn straight from the prior, the 25,000 evaluations used below would be expected to turn up
-**0.05 failures** — which is the whole difficulty.
+Drawn from the prior, the 25,000 evaluations used below would be expected to produce 0.05
+failures.
 
-## The run
+## Example run
 
 ```julia
 using ARIS
@@ -61,7 +61,7 @@ which you can run directly:
 julia --project=. examples/basic_usage.jl
 ```
 
-## What it prints
+## Output
 
 ```text
 evaluations:  25000
@@ -69,14 +69,14 @@ estimate:     2.245e-06
 truth:        1.822e-06
 ```
 
-!!! note "About this number"
+!!! note "Reproducibility of this value"
     `Random.seed!(1)` makes the run reproducible for a fixed Julia version and dependency set;
     the values above come from Julia 1.12.6 with the pinned `Manifest.toml`. A different Julia
     version, a different seed, or a resolved (rather than pinned) environment will move the
     estimate. Treat it as the right order of magnitude, not a golden value — a single run of a
     stochastic estimator is one draw, not a converged answer.
 
-## Reading the call
+## Arguments
 
 | piece | what it does |
 |---|---|
@@ -88,7 +88,7 @@ truth:        1.822e-06
 | `cv.buffer` | every evaluated sample, with its robustness, weight and conditioning value |
 | `is_estimate(buffer; threshold)` | the importance-sampling estimate of ℙ[ρ ≤ threshold] |
 
-## The thing worth noticing
+## Reuse across thresholds
 
 `is_estimate` takes a `threshold` argument, and nothing about the trained run was specific to
 γ = 0. The same buffer answers other thresholds:
@@ -100,11 +100,11 @@ for γ in (0.0, 0.5, 1.0, 1.5)
 end
 ```
 
-That is the amortization claim, and it has real conditions attached — a threshold the schedule
-never reached is not estimated reliably just because the call returns a number. See
+Reuse across thresholds is subject to conditions. A threshold the schedule never reached is not
+estimated reliably, even though the call returns a value. See
 [Working with multiple thresholds](multiple-thresholds.md).
 
-## Next
+## See also
 
 - [Defining a system](defining-a-system.md): put your own problem behind the `System` interface.
 - [Training a proposal](training.md): choosing the model, the schedule, and the budget.

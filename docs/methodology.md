@@ -24,7 +24,7 @@ The first batch is drawn from the system's own input distribution, untruncated:
 This batch costs `n_samples` evaluations and buys the first look at the robustness distribution.
 It is stored in the buffer like every other batch, so it contributes to later estimates.
 
-### Then, for each subsequent batch
+### Subsequent batches
 
 <div class="aris-math" markdown="0">
 1. γ<sub>k</sub> ← schedule update &nbsp;→&nbsp; 2. r<sub>i</sub> ~ q<sub>ψ</sub>(· | r ≤ γ<sub>k</sub>) &nbsp;→&nbsp; 3. x<sub>i</sub> ~ q<sub>θ</sub>(· | r<sub>i</sub>) &nbsp;→&nbsp; 4. evaluate &nbsp;→&nbsp; 5. weight &nbsp;→&nbsp; 6. refit
@@ -59,7 +59,7 @@ It is stored in the buffer like every other batch, so it contributes to later es
 
 6. **Refit** the model, and push everything into the buffer.
 
-## Which data the refit sees
+## Data used by each refit
 
 This differs by model type, and it matters.
 
@@ -69,23 +69,22 @@ This differs by model type, and it matters.
 | [`ConditionalGaussian`](api-models.md#conditionalgaussian) via `ConditionalGaussianCEM` | the **current batch** only | elites: the lowest-ρ samples below `𝒫.thresh_train`, at least `min_elite` |
 | [`CrossEntropyMethod`](api-estimators.md#crossentropymethod) (baseline) | the current batch | the samples with ρ ≤ 0, or the `n_elite` lowest if there are fewer |
 
-The ARIS path accumulating the whole buffer is deliberate: the conditional model is trying to
-learn q<sub>θ</sub>(x | r) across the *whole* range of r, so throwing away earlier, higher-ρ
-batches would discard exactly the data that pins down the easy end of the conditional.
+Accumulating the buffer is deliberate. The conditional model fits q<sub>θ</sub>(x | r) across the
+full range of r, so discarding earlier, higher-ρ batches would remove the data that constrains the
+conditional at high robustness.
 
-!!! note "This is a method difference, not just an implementation detail"
-    The paper's Experiment 3 compares the conditioned method against an unconditional baseline, and
-    records that the conditioned method fits the accumulated buffer while the baseline fits the
-    current batch's elites. The comparison therefore evaluates two complete methods, not
-    conditioning in isolation. See [Paper and method](paper.md).
+!!! note "Method difference"
+    Because the conditional path fits the accumulated buffer while the unconditional baselines fit
+    the current batch's elites, the two differ in more than conditioning. If you compare them,
+    you are comparing two complete methods, not conditioning in isolation.
 
-### Weight clamping
+## Weight clamping
 
 Weights are clamped to `max_weight` (default `10.0`) **for fitting only**. The buffer retains the
 raw weights, so estimation is unaffected. This stops a single enormous weight from dominating the
 EM fit and collapsing the mixture, without biasing the estimator.
 
-## How `JointModel` refits
+## Fitting `JointModel`
 
 `Distributions.fit(jm, xs, rs, weights)` fits the two factors separately:
 
@@ -126,22 +125,21 @@ This is **not** self-normalised — the denominator is the fixed sample count, n
 sample's weight already refers to the proposal that produced it, so pooling batches is just
 averaging.
 
-Note what this means for amortization: γ appears only in the indicator. The weights were fixed at
-sampling time and do not depend on the threshold you ask about. That is why one trained run
-answers a whole grid of thresholds for free — and also why
-[reach and support still have to be checked](multiple-thresholds.md).
+γ appears only in the indicator. The weights are fixed at sampling time and do not depend on the
+threshold queried, so one trained run yields estimates at any number of thresholds without
+additional simulation, subject to the
+[reach and support conditions](multiple-thresholds.md).
 
 ## Unbiasedness
 
-!!! warning "What is and is not established"
-    Proposal-of-origin adaptive importance sampling is unbiased **under the conditional-history and
-    support assumptions stated in the paper**. The pooled adaptive estimator does not come with an
-    unbiasedness guarantee, because later proposals depend on earlier samples — the batches are not
-    independent draws.
+!!! warning "Scope of the guarantee"
+    Importance sampling with proposal-of-origin weights is unbiased when the proposal covers the
+    failure region: each sample is weighted against the density that actually produced it.
 
-    The paper's multi-threshold results use a pooled **balance-MIS** estimator, which is
-    implemented under `paper/`, not in the package. `is_estimate` is the proposal-of-origin
-    estimator described above.
+    Pooling across adaptive batches carries no such guarantee. `train!` fits each proposal from
+    the samples the previous ones produced, so the batches are not independent draws. Treat a
+    pooled estimate as a point estimate with unquantified bias, and report the spread across
+    seeds rather than a single run.
 
 ## Stratified adaptation
 
@@ -157,7 +155,7 @@ A model that opts in has its schedule and its fit computed from the adaptive dra
 estimation still uses every draw. The defaults — `falses(n)` and `false` — make this inert for all
 the models shipped with the package.
 
-## Next
+## See also
 
 - [Training a proposal](training.md): choosing the model, schedule and budget.
 - [Estimating failure probabilities](estimating.md): reading estimates and diagnostics off a run.

@@ -3,7 +3,7 @@
 A problem is a subtype of `System.SystemParameters` plus a handful of methods. Nothing else in the
 package needs to know what your system is.
 
-## The interface
+## Interface
 
 Subtype and extend these, all in the `System` module:
 
@@ -16,7 +16,7 @@ Subtype and extend these, all in the `System` module:
 | `System.simulate(s, X)` | `sdim × depth × N` array | run the system on inputs |
 | `System.evaluate(s, S)` | `Vector` of length N | robustness of each simulated state |
 
-!!! info "Two call shapes"
+!!! info "Call shapes"
     `train!` works in **batches**: `simulate` receives a `xdim × N` matrix and returns an
     `sdim × depth × N` array; `evaluate` receives that 3-D array and returns a length-N vector.
 
@@ -24,7 +24,7 @@ Subtype and extend these, all in the `System` module:
     **per sample**: `simulate` receives one vector and `evaluate` receives what `simulate`
     returned. Define both shapes if you want to run the baselines on your system.
 
-## A complete example
+## Example
 
 A linear limit state in two dimensions, whose answer is known exactly:
 
@@ -71,16 +71,16 @@ train!(cv, sys)
 is_estimate(cv.buffer; threshold = 0.0)
 ```
 
-## Getting robustness right
+## Choosing a robustness function
 
-This is the part that determines whether the method works at all.
+The choice of robustness function determines whether the method is applicable.
 
-!!! warning "Robustness must be informative away from failure"
-    **Failure is ρ ≤ 0** ([convention](rare-events.md#the-robustness-convention)), but a robustness
-    that is only meaningful *at* failure defeats the method. ARIS learns q<sub>θ</sub>(x | r) over
-    a whole ladder of r values, and the schedule descends through them. If ρ is effectively a step
-    function — large and flat until it suddenly drops — there is no gradient for the schedule to
-    follow and no structure for the conditional model to learn.
+!!! warning "Robustness away from the failure region"
+    Failure is ρ ≤ 0 ([convention](rare-events.md#the-robustness-convention)), but a robustness
+    function that is informative only at failure is unsuitable. ARIS fits q<sub>θ</sub>(x | r) over
+    a range of r values, and the schedule descends through them. If ρ is effectively a step
+    function, large and flat until it drops, the schedule has no gradient to follow and the
+    conditional model has no structure to fit.
 
 Practical guidance:
 
@@ -93,8 +93,8 @@ Practical guidance:
   conditional model then has to represent a noisier relationship, and the gap between the requested
   r and the realised ρ widens.
 
-For a sequential problem, fold the whole trajectory into one number — `min` over timesteps of a
-per-step margin is the standard pattern, and it is what the bundled crosswalk problem does.
+For a sequential problem, reduce the trajectory to a single number. The standard choice is the
+minimum over timesteps of a per-step margin, which is what the bundled crosswalk problem uses.
 
 ## Dimensions
 
@@ -124,12 +124,12 @@ MDP-style path used by the crosswalk example.
 
 !!! note
     The `RMDP` and conditional-policy code that consumes these is behind the
-    `CGV_ENABLE_POLICY` gate, disabled by default, and is not used by any paper experiment
+    `CGV_ENABLE_POLICY` gate and is disabled by default
     ([Installation](install.md#optional-integrations)). For a sequential problem you can still use
     the main path: implement batched `simulate` to roll out the whole trajectory and `evaluate` to
     reduce it to one robustness value.
 
-## Next
+## See also
 
 - [Training a proposal](training.md): configuring the model and schedule for your system.
 - [Example problems](problems.md): the four systems that ship with the package.

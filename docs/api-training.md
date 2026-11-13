@@ -81,7 +81,7 @@ baseline with the same shape.
 !!! note
     `show_progress` is accepted for interface compatibility and does not currently drive a
     progress display. Use `log_callback` to observe a run
-    ([example](training.md#watching-a-run)).
+    ([example](training.md#logging-a-run)).
 
 ## `ConditionalGaussianCEM`
 
@@ -96,7 +96,7 @@ packed into `𝒫`. Remaining keywords are forwarded.
 
 This path fits the **current batch's** elites — samples below `thresh_train`, at least
 `min_elite` of them — rather than the accumulated buffer
-([Methodology](methodology.md#which-data-the-refit-sees)).
+([Methodology](methodology.md#data-used-by-each-refit)).
 
 ## Sampling strategies
 
@@ -197,9 +197,9 @@ Exported alongside it: `elapsed`, `log_failure_probability`, `log_target_perform
 !!! note
     `logger` is untyped and defaults to `nothing` because TensorBoard and Weights & Biases are not
     dependencies of this package. With no logger attached, logging prints and is otherwise inert.
-    For most uses `log_callback` is simpler ([example](training.md#watching-a-run)).
+    For most uses `log_callback` is simpler ([example](training.md#logging-a-run)).
 
-## Next
+## See also
 
 - [Estimators and baselines](api-estimators.md): turning a buffer into an estimate.
 - [Methodology](methodology.md): what the loop does, step by step.

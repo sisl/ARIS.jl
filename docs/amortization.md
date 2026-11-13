@@ -1,6 +1,6 @@
 # Amortized importance sampling
 
-## The idea
+## Formulation
 
 An ordinary adaptive proposal is a distribution over inputs, q(x), fitted toward one failure
 region. ARIS instead fits a **joint** distribution over inputs *and* the robustness value they
@@ -19,8 +19,8 @@ model = JointModel(Normal(), ConditionalEMGMM(2, 3, 3))
 #                   q_ψ(r)          q_θ(x | r)
 ```
 
-The conditional factor is the whole point. It does not answer "which inputs fail?" — it answers the
-more general question **"which inputs produce robustness r?"**, for every r at once.
+The conditional factor is what makes the model reusable. It does not model the set of failing
+inputs; it models the inputs that produce robustness r, for all values of r simultaneously.
 
 ## Threshold reuse
 
@@ -37,17 +37,17 @@ Sampling from it is two steps, and this is literally what `rand(rng, ::JointMode
 1. draw r ~ truncated(q<sub>ψ</sub>; upper = γ)
 2. draw x ~ q<sub>θ</sub>(· | r)
 
-**No refitting. No simulator calls.** Changing γ changes only the truncation point of a univariate
-distribution. That is the amortization: the expensive object — the conditional model q<sub>θ</sub>,
-which is what the 25,000 evaluations paid for — is reused unchanged across every threshold.
+Changing γ changes only the truncation point of a univariate distribution; no refitting and no
+further simulator calls are required. The conditional model q<sub>θ</sub>, which accounts for the
+simulator budget spent during training, is reused unchanged at every threshold.
 
-!!! info "Why this is more than a trick"
+!!! info "Interpretation"
     A per-threshold method spends its budget learning *one* slice of the input space. The
     conditional model spends the same budget learning how the input distribution **deforms** as
     robustness decreases. The ladder of thresholds is not overhead to be amortized away; it is the
     training signal that makes the conditional model learnable in the first place.
 
-## The density, and why it is an integral
+## Marginal proposal density
 
 To compute importance weights you need q<sup>γ</sup><sub>X</sub>(x), and the equation above is an
 integral with no closed form in general. The package evaluates it numerically, and uses the *same*
@@ -67,11 +67,11 @@ peak near γ.
 Accuracy and method are tunable; see
 [Models and distributions](api-models.md#marginal-density-evaluation).
 
-## What this does not give you for free
+## Conditions and limitations
 
 Amortization is a statement about the *proposal*, not a guarantee about the *estimate*.
 
-!!! warning "Three conditions"
+!!! warning "Conditions"
     **Reach.** The training schedule walks the conditioning threshold down from the prior. A γ far
     below where the schedule stopped is a region the conditional model was never shown. The density
     integral still evaluates and `is_estimate` still returns a number — it is extrapolation, and it
@@ -87,7 +87,7 @@ Amortization is a statement about the *proposal*, not a guarantee about the *est
 
 [Working with multiple thresholds](multiple-thresholds.md) covers how to check each of these.
 
-## Relationship to the baselines
+## Comparison with the baselines
 
 | | proposal | thresholds per fit | in this package |
 |---|---|---|---|
@@ -99,7 +99,7 @@ Amortization is a statement about the *proposal*, not a guarantee about the *est
 AMS also produces intermediate levels, but they are a by-product of its level decomposition at a
 fixed target, not a proposal you can re-aim at an arbitrary γ afterwards.
 
-## Next
+## See also
 
 - [Methodology](methodology.md): the training loop that produces q<sub>ψ</sub> and q<sub>θ</sub>.
 - [Working with multiple thresholds](multiple-thresholds.md): reading a curve off one run.
